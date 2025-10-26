@@ -1,43 +1,458 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects | Abhijeet Yadav</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* ====== GLOBAL ====== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #0a192f;
+      color: #e0e6ed;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ====== HEADER ====== */
+    header {
+      background-color: #0b1d3a;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 25px;
+      max-width: 1200px;
+      margin: auto;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #00b4d8;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: #f1f1f1;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links .active {
+      color: #ffd60a;
+    }
+
+    #theme-toggle {
+      background: #00b4d8;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      padding: 8px 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    #theme-toggle:hover {
+      transform: rotate(15deg);
+    }
+
+    /* ====== PROJECTS SECTION ====== */
+    .projects {
+      width: 100%;
+      background: linear-gradient(135deg, #001d3d, #003566);
+      padding: 100px 20px;
+      text-align: center;
+      animation: fadeIn 1s ease;
+    }
+
+    .projects h2 {
+      color: #ffd60a;
+      font-size: 2.3rem;
+      margin-bottom: 40px;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 15px;
+      padding: 30px 25px;
+      text-align: left;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 15px rgba(0, 180, 216, 0.3);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .project-card h3 {
+      color: #00b4d8;
+      margin-bottom: 10px;
+      font-size: 1.4rem;
+    }
+
+    .project-card p {
+      color: #dbe4ee;
+      font-size: 0.98rem;
+      margin-bottom: 20px;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tech-tag {
+      background: rgba(0, 180, 216, 0.1);
+      border: 1px solid rgba(0, 180, 216, 0.3);
+      color: #00b4d8;
+      font-size: 0.85rem;
+      padding: 6px 12px;
+      border-radius: 20px;
+      transition: 0.3s;
+    }
+
+    .tech-tag:hover {
+      background: #00b4d8;
+      color: #001d3d;
+      box-shadow: 0 0 10px rgba(0, 180, 216, 0.5);
+    }
+
+    /* ====== FEATURED BANNER ====== */
+    .featured {
+      background: #0b2545;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .featured h3 {
+      color: #ffd60a;
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .featured p {
+      color: #dbe4ee;
+      max-width: 800px;
+      margin: auto;
+      font-size: 1.05rem;
+    }
+
+    /* ====== FOOTER ====== */
+    footer {
+      background: #000814;
+      color: #bbb;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #00b4d8;
+    }
+    .hire-btn {
+  background: linear-gradient(90deg, #00b4d8, #0096c7);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 22px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.hire-btn:hover {
+  background: linear-gradient(90deg, #ffd60a, #ffc300);
+  color: #001d3d;
+  transform: scale(1.05);
+}
+
+
+    footer a:hover {
+      color: #ffd60a;
+    }
+
+    /* ====== ANIMATION ====== */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 768px) {
+      .projects h2 {
+        font-size: 1.9rem;
+      }
+
+      .project-card {
+        padding: 25px 20px;
+      }
+    }
+    /* ===== NAVBAR BASE ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  max-width: 1200px;
+  margin: auto;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links li a {
+  color: #f1f1f1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-links li a:hover,
+.nav-links .active {
+  color: #ffd60a;
+}
+
+/* ===== HAMBURGER ===== */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  position: relative;
+  z-index: 1001;
+}
+
+.bar {
+  height: 3px;
+  width: 25px;
+  background: #00b4d8;
+  margin: 4px 0;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* ===== MOBILE MENU ACTIVE ===== */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 29, 61, 0.97);
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  }
+
+  .nav-links.active {
+    display: flex;
+    animation: slideDown 0.3s ease forwards;
+  }
+
+  @keyframes slideDown {
+    from {
+      transform: translateY(-15px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .hire-btn {
+    display: none; /* hide hire button in mobile menu header */
+  }
+}
+
+  </style>
 </head>
+
 <body>
+  <!-- ====== HEADER ====== -->
   <header>
-    <nav class="navbar">
-      <h1 class="logo">Abhijeet Yadav</h1>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="projects.html" class="active">Projects</a></li>
-        <li><a href="certificates.html">Certificates</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <button id="theme-toggle">🌓</button>
-    </nav>
-  </header>
+  <nav class="navbar">
+    <h1 class="logo">Abhijeet Yadav</h1>
 
-  <section class="content">
-    <h2>My Projects</h2>
-
-    <div class="project">
-      <h3>Online Job Portal</h3>
-      <p>A web-based mini-project that allows users to search and apply for jobs. Built using HTML, CSS, JavaScript, and PHP.</p>
+    <!-- Hamburger Icon -->
+    <div class="menu-toggle" id="mobile-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
     </div>
 
-    <div class="project">
-      <h3>Folk Tech Aware</h3>
-      <p>My final year project — a cybersecurity awareness platform that educates users about online safety and digital hygiene.</p>
+    <!-- Navigation Links -->
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="certificates.html">Certificates</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+
+    <!-- Hire Me Button -->
+    <button class="hire-btn" onclick="location.href='contact.html'">Hire Me</button>
+  </nav>
+</header>
+
+
+  <!-- ====== PROJECTS SECTION ====== -->
+  <section class="projects">
+    <h2>My Projects</h2>
+
+    <div class="project-grid">
+      <div class="project-card">
+        <h3>Online Job Portal</h3>
+        <p>A responsive platform that connects job seekers and employers — allowing users to search, apply, and post jobs efficiently.</p>
+        <div class="tech-stack">
+          <span class="tech-tag">HTML</span>
+          <span class="tech-tag">CSS</span>
+          <span class="tech-tag">JavaScript</span>
+        
+          <span class="tech-tag">MySQL</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <h3>Folk Tech Aware</h3>
+        <p>A cybersecurity awareness platform educating users about safe digital practices through articles, simulations, and quizzes.</p>
+        <div class="tech-stack">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Flask</span>
+          <span class="tech-tag">Bootstrap</span>
+          <span class="tech-tag">SQLite</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <h3>EduBuddy</h3>
+        <p>An advanced school management system using Blazor and Syncfusion — simplifying attendance, fees, and academic analytics.</p>
+        <div class="tech-stack">
+          <span class="tech-tag">C#</span>
+          <span class="tech-tag">Blazor</span>
+          <span class="tech-tag">Syncfusion</span>
+          <span class="tech-tag">Entity Framework</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <h3>TradeState</h3>
+        <p>A stock trading simulation web app where users can track prices, make virtual trades, and analyze performance with live data.</p>
+        <div class="tech-stack">
+            <span class="tech-tag">HTML</span>
+          <span class="tech-tag">CSS</span>
+          
+          <span class="tech-tag">React</span>
+          <span class="tech-tag">Node.js</span>
+          
+          <span class="tech-tag">MongoDB</span>
+         
+        </div>
+      </div>
+
+      <div class="project-card">
+        <h3>CollegeFest</h3>
+        <p>A dynamic college event management site with registration, live updates, and interactive photo galleries for tech fests.</p>
+        <div class="tech-stack">
+          <span class="tech-tag">HTML</span>
+          <span class="tech-tag">Tailwind CSS</span>
+          <span class="tech-tag">JavaScript</span>
+          <span class="tech-tag">Firebase</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <h3>Portfolio Website</h3>
+        <p>This personal portfolio website — designed to showcase my work, skills, and creativity in a modern, interactive layout.</p>
+        <div class="tech-stack">
+          <span class="tech-tag">HTML</span>
+          <span class="tech-tag">CSS</span>
+          <span class="tech-tag">JavaScript</span>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- ====== FEATURED BANNER ====== -->
+  <section class="featured">
+    <h3>Building Ideas into Reality 🚀</h3>
+    <p>Each project I create reflects my passion for innovation and my commitment to developing scalable, secure, and user-focused software experiences.</p>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
   <footer>
-    <p>© 2025 Abhijeet Yadav</p>
+    <p>© 2025 Abhijeet Yadav | 
+      <a href="https://github.com/AbhijeetYadav09" target="_blank">GitHub</a> | 
+      <a href="https://www.linkedin.com/in/abhijeet-yadav-729333291/" target="_blank">LinkedIn</a>
+    </p>
   </footer>
-  <script src="assets/js/script.js"></script>
+
+  <script>
+  const menu = document.getElementById("mobile-menu");
+  const navLinks = document.querySelector(".nav-links");
+
+  menu.addEventListener("click", () => {
+    menu.classList.toggle("active");
+    navLinks.classList.toggle("active");
+  });
+</script>
+
 </body>
 </html>

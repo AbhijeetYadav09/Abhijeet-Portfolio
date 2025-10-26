@@ -19,6 +19,24 @@
       color: #e0e6ed;
       line-height: 1.6;
     }
+.hire-btn {
+  background: linear-gradient(90deg, #00b4d8, #0096c7);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 22px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.hire-btn:hover {
+  background: linear-gradient(90deg, #ffd60a, #ffc300);
+  color: #001d3d;
+  transform: scale(1.05);
+}
 
     a {
       text-decoration: none;
@@ -258,24 +276,124 @@
         font-size: 0.9rem;
       }
     }
+    /* ===== NAVBAR BASE ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  max-width: 1200px;
+  margin: auto;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links li a {
+  color: #f1f1f1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-links li a:hover,
+.nav-links .active {
+  color: #ffd60a;
+}
+
+/* ===== HAMBURGER ===== */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  position: relative;
+  z-index: 1001;
+}
+
+.bar {
+  height: 3px;
+  width: 25px;
+  background: #00b4d8;
+  margin: 4px 0;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* ===== MOBILE MENU ACTIVE ===== */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 29, 61, 0.97);
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  }
+
+  .nav-links.active {
+    display: flex;
+    animation: slideDown 0.3s ease forwards;
+  }
+
+  @keyframes slideDown {
+    from {
+      transform: translateY(-15px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .hire-btn {
+    display: none; /* hide hire button in mobile menu header */
+  }
+}
+
   </style>
 </head>
 
 <body>
   <!-- ====== HEADER ====== -->
-  <header>
-    <nav class="navbar">
-      <h1 class="logo">Abhijeet Yadav</h1>
-      <ul class="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="certificates.html">Certificates</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <button id="theme-toggle">🌓</button>
-    </nav>
-  </header>
+ <header>
+  <nav class="navbar">
+    <h1 class="logo">Abhijeet Yadav</h1>
+
+    <!-- Hamburger Icon -->
+    <div class="menu-toggle" id="mobile-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+
+    <!-- Navigation Links -->
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="certificates.html">Certificates</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+
+    <!-- Hire Me Button -->
+    <button class="hire-btn" onclick="location.href='contact.html'">Hire Me</button>
+  </nav>
+</header>
+
 
   <!-- ====== HERO SECTION ====== -->
   <section class="hero">
@@ -315,17 +433,15 @@
     </p>
   </footer>
 
-  <script>
-    // Theme toggle for fun (optional dark mode toggle)
-    const toggleBtn = document.getElementById('theme-toggle');
-    toggleBtn.addEventListener('click', () => {
-      document.body.classList.toggle('alt');
-      if (document.body.classList.contains('alt')) {
-        document.body.style.background = "#001d3d";
-      } else {
-        document.body.style.background = "#0a192f";
-      }
-    });
-  </script>
+ <script>
+  const menu = document.getElementById("mobile-menu");
+  const navLinks = document.querySelector(".nav-links");
+
+  menu.addEventListener("click", () => {
+    menu.classList.toggle("active");
+    navLinks.classList.toggle("active");
+  });
+</script>
+
 </body>
 </html>

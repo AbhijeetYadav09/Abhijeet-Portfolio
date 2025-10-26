@@ -1,42 +1,447 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Certificates | Abhijeet Yadav</title>
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-  <header>
-    <nav class="navbar">
-      <h1 class="logo">Abhijeet Yadav</h1>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="certificates.html" class="active">Certificates</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <button id="theme-toggle">🌓</button>
-    </nav>
-  </header>
+  <style>
+    /* ====== GLOBAL ====== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+      scroll-behavior: smooth;
+    }
 
-  <section class="content">
-    <h2>Certificates</h2>
-    <ul class="cert-list">
-      <li>Email Security Associate – OPSWAT Academy</li>
-      <li>Ethical Hacking & Cyber Security – Bitten Tech</li>
-      <li>Introduction to Critical Infrastructure Protection (ICIP) – OPSWAT Academy</li>
-      <li>CyberSecurity Awareness – Uttar Pradesh Police</li>
-      <li>Cybersecurity Fundamentals Associate (OCFA) – OPSWAT Academy</li>
-      <li>Network Security Associate (ONSA) – OPSWAT Academy</li>
-      <li>Python Programming – Softpro India Computer Technologies Pvt. Ltd.</li>
+    body {
+      background-color: #0a192f;
+      color: #e0e6ed;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ====== HEADER ====== */
+    header {
+      background-color: #0b1d3a;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 25px;
+      max-width: 1200px;
+      margin: auto;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #00b4d8;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: #f1f1f1;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links .active {
+      color: #ffd60a;
+    }
+
+    #theme-toggle {
+      background: #00b4d8;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      padding: 8px 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    #theme-toggle:hover {
+      transform: rotate(15deg);
+    }
+
+    /* ====== CERTIFICATES SECTION ====== */
+    .certificates {
+      width: 100%;
+      background: linear-gradient(135deg, #001d3d, #003566);
+      padding: 100px 20px;
+      text-align: center;
+      animation: fadeIn 1s ease;
+    }
+
+    .certificates h2 {
+      color: #ffd60a;
+      font-size: 2.3rem;
+      margin-bottom: 40px;
+    }
+
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .cert-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 25px 20px;
+      transition: all 0.3s ease;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cert-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-8px);
+      box-shadow: 0 0 15px rgba(0, 180, 216, 0.3);
+    }
+
+    .cert-icon {
+      font-size: 2.5rem;
+      color: #00b4d8;
+      margin-bottom: 12px;
+    }
+
+    .cert-title {
+      font-size: 1.1rem;
+      color: #e0e6ed;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    .cert-org {
+      color: #ffd60a;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+
+    .cert-date {
+      font-size: 0.85rem;
+      color: #adb5bd;
+      margin-bottom: 15px;
+    }
+
+    .cert-img {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    .credential-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 14px;
+      border-radius: 20px;
+      background: #00b4d8;
+      color: white;
+      font-size: 0.9rem;
+      transition: 0.3s;
+    }
+
+    .credential-btn:hover {
+      background: #ffd60a;
+      color: #001d3d;
+    }
+
+    /* ====== BOTTOM MESSAGE ====== */
+    .note {
+      margin-top: 70px;
+      color: #dbe4ee;
+      font-size: 1.05rem;
+      text-align: center;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.8;
+    }
+
+    /* ====== FOOTER ====== */
+    footer {
+      background: #000814;
+      color: #bbb;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      margin-top: 80px;
+    }
+
+    footer a {
+      color: #00b4d8;
+    }
+
+    footer a:hover {
+      color: #ffd60a;
+    }
+
+    /* ====== ANIMATION ====== */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 768px) {
+      .certificates h2 {
+        font-size: 1.9rem;
+      }
+      .cert-card {
+        padding: 20px 15px;
+      }
+    }
+    .hire-btn {
+  background: linear-gradient(90deg, #00b4d8, #0096c7);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 22px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.hire-btn:hover {
+  background: linear-gradient(90deg, #ffd60a, #ffc300);
+  color: #001d3d;
+  transform: scale(1.05);
+}
+/* ===== NAVBAR BASE ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  max-width: 1200px;
+  margin: auto;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links li a {
+  color: #f1f1f1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-links li a:hover,
+.nav-links .active {
+  color: #ffd60a;
+}
+
+/* ===== HAMBURGER ===== */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  position: relative;
+  z-index: 1001;
+}
+
+.bar {
+  height: 3px;
+  width: 25px;
+  background: #00b4d8;
+  margin: 4px 0;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* ===== MOBILE MENU ACTIVE ===== */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 29, 61, 0.97);
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  }
+
+  .nav-links.active {
+    display: flex;
+    animation: slideDown 0.3s ease forwards;
+  }
+
+  @keyframes slideDown {
+    from {
+      transform: translateY(-15px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .hire-btn {
+    display: none; /* hide hire button in mobile menu header */
+  }
+}
+
+
+  </style>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!-- ====== HEADER ====== -->
+ <header>
+  <nav class="navbar">
+    <h1 class="logo">Abhijeet Yadav</h1>
+
+    <!-- Hamburger Icon -->
+    <div class="menu-toggle" id="mobile-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+
+    <!-- Navigation Links -->
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="certificates.html">Certificates</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
     </ul>
+
+    <!-- Hire Me Button -->
+    <button class="hire-btn" onclick="location.href='contact.html'">Hire Me</button>
+  </nav>
+</header>
+
+
+  <!-- ====== CERTIFICATES SECTION ====== -->
+  <section class="certificates">
+    <h2>Certificates</h2>
+
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fas fa-envelope-open-text"></i></div>
+        <div class="cert-title">Email Security Associate</div>
+        <div class="cert-org">OPSWAT Academy</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fas fa-user-shield"></i></div>
+        <div class="cert-title">Ethical Hacking & Cyber Security</div>
+        <div class="cert-org">Bitten Tech</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fas fa-network-wired"></i></div>
+        <div class="cert-title">Introduction to Critical Infrastructure Protection (ICIP)</div>
+        <div class="cert-org">OPSWAT Academy</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fas fa-shield-alt"></i></div>
+        <div class="cert-title">CyberSecurity Awareness</div>
+        <div class="cert-org">Uttar Pradesh Police</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fas fa-lock"></i></div>
+        <div class="cert-title">Cybersecurity Fundamentals Associate (OCFA)</div>
+        <div class="cert-org">OPSWAT Academy</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fas fa-server"></i></div>
+        <div class="cert-title">Network Security Associate (ONSA)</div>
+        <div class="cert-org">OPSWAT Academy</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fab fa-python"></i></div>
+        <div class="cert-title">Python Programming</div>
+        <div class="cert-org">Softpro India Computer Technologies Pvt. Ltd.</div>
+      </div>
+
+      <!-- ====== NEW CERTIFICATES ====== -->
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fas fa-code"></i></div>
+        <div class="cert-title">Complete Web Development Course</div>
+        <div class="cert-org">Udemy</div>
+        
+       
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fas fa-user-lock"></i></div>
+        <div class="cert-title">Pre Security</div>
+        <div class="cert-org">TryHackMe</div>
+       
+       
+      </div>
+    </div>
+
+    <div class="note">
+      <p>Each certificate reflects my journey of continuous learning and passion for technology — 
+      from mastering cybersecurity and full-stack development to building real-world projects that 
+      blend creativity and problem-solving. Learning never stops, and neither do I 🚀</p>
+    </div>
   </section>
 
+  <!-- ====== FOOTER ====== -->
   <footer>
-    <p>© 2025 Abhijeet Yadav</p>
+    <p>© 2025 Abhijeet Yadav | 
+      <a href="https://github.com/AbhijeetYadav09" target="_blank">GitHub</a> | 
+      <a href="https://www.linkedin.com/in/abhijeet-yadav-729333291/" target="_blank">LinkedIn</a>
+    </p>
   </footer>
-  <script src="assets/js/script.js"></script>
+
+ <script>
+  const menu = document.getElementById("mobile-menu");
+  const navLinks = document.querySelector(".nav-links");
+
+  menu.addEventListener("click", () => {
+    menu.classList.toggle("active");
+    navLinks.classList.toggle("active");
+  });
+</script>
+
 </body>
 </html>

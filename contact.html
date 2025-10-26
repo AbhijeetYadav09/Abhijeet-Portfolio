@@ -1,39 +1,468 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact | Abhijeet Yadav</title>
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-  <header>
-    <nav class="navbar">
-      <h1 class="logo">Abhijeet Yadav</h1>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="certificates.html">Certificates</a></li>
-        <li><a href="contact.html" class="active">Contact</a></li>
-      </ul>
-      <button id="theme-toggle">🌓</button>
-    </nav>
-  </header>
+  <style>
+    /* ===== GLOBAL ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+      scroll-behavior: smooth;
+    }
 
-  <section class="content">
-    <h2>Contact Me</h2>
-    <form action="mailto:erabhijeetyada09@gmail.com" method="post" enctype="text/plain" class="contact-form">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-      <button type="submit" class="btn">Send Message</button>
-    </form>
+    body {
+      background-color: #0a192f;
+      color: #e0e6ed;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background-color: #0b1d3a;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 25px;
+      max-width: 1200px;
+      margin: auto;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #00b4d8;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: #f1f1f1;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links .active {
+      color: #ffd60a;
+    }
+
+    /* New modern portfolio button */
+    .hire-btn {
+      background: linear-gradient(90deg, #00b4d8, #0096c7);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 22px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .hire-btn:hover {
+      background: linear-gradient(90deg, #ffd60a, #ffc300);
+      color: #001d3d;
+      transform: scale(1.05);
+    }
+
+    /* ===== CONTACT SECTION ===== */
+    .contact {
+      width: 100%;
+      background: linear-gradient(135deg, #001d3d, #003566);
+      padding: 100px 20px;
+      text-align: center;
+      animation: fadeIn 1s ease;
+    }
+
+    .contact h2 {
+      color: #ffd60a;
+      font-size: 2.4rem;
+      margin-bottom: 20px;
+    }
+
+    .intro {
+      max-width: 850px;
+      margin: 0 auto 50px;
+      font-size: 1.1rem;
+      color: #dbe4ee;
+      line-height: 1.8;
+    }
+
+    /* ===== CONTACT GRID ===== */
+    .contact-container {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      flex-wrap: wrap;
+      gap: 40px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    /* ===== LEFT CARD ===== */
+    .contact-info {
+      flex: 1 1 380px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 40px 30px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 0 25px rgba(0, 180, 216, 0.15);
+    }
+
+    .contact-info h3 {
+      color: #00b4d8;
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+    }
+
+    .info-block {
+      margin-bottom: 25px;
+    }
+
+    .info-block h4 {
+      color: #ffd60a;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+
+    .info-block p {
+      color: #dbe4ee;
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    .social-links {
+      margin-top: 20px;
+    }
+
+    .social-links a {
+      display: inline-block;
+      margin-right: 15px;
+      font-size: 1.4rem;
+      color: #00b4d8;
+      transition: 0.3s;
+    }
+
+    .social-links a:hover {
+      color: #ffd60a;
+      transform: translateY(-3px);
+    }
+
+    /* ===== FORM ===== */
+    .contact-form {
+      flex: 1 1 400px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 35px 30px;
+      text-align: left;
+      box-shadow: 0 0 25px rgba(0, 180, 216, 0.15);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      font-size: 1rem;
+      transition: 0.3s;
+      outline: none;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border: 1px solid #00b4d8;
+      box-shadow: 0 0 8px rgba(0, 180, 216, 0.5);
+    }
+
+    .contact-form button {
+      width: 100%;
+      background: #00b4d8;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: 600;
+    }
+
+    .contact-form button:hover {
+      background: #ffd60a;
+      color: #001d3d;
+      transform: scale(1.03);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #000814;
+      color: #bbb;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      margin-top: 80px;
+    }
+
+    footer a {
+      color: #00b4d8;
+    }
+
+    footer a:hover {
+      color: #ffd60a;
+    }
+
+    /* ===== ANIMATION ===== */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .contact h2 {
+        font-size: 2rem;
+      }
+
+      .contact-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .contact-info,
+      .contact-form {
+        width: 100%;
+      }
+    }
+    /* ===== NAVBAR BASE ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  max-width: 1200px;
+  margin: auto;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links li a {
+  color: #f1f1f1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-links li a:hover,
+.nav-links .active {
+  color: #ffd60a;
+}
+
+/* ===== HAMBURGER ===== */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  position: relative;
+  z-index: 1001;
+}
+
+.bar {
+  height: 3px;
+  width: 25px;
+  background: #00b4d8;
+  margin: 4px 0;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* ===== MOBILE MENU ACTIVE ===== */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 29, 61, 0.97);
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  }
+
+  .nav-links.active {
+    display: flex;
+    animation: slideDown 0.3s ease forwards;
+  }
+
+  @keyframes slideDown {
+    from {
+      transform: translateY(-15px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .hire-btn {
+    display: none; /* hide hire button in mobile menu header */
+  }
+}
+
+  </style>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!-- ===== HEADER ===== -->
+  <header>
+  <nav class="navbar">
+    <h1 class="logo">Abhijeet Yadav</h1>
+
+    <!-- Hamburger Icon -->
+    <div class="menu-toggle" id="mobile-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+
+    <!-- Navigation Links -->
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="certificates.html">Certificates</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+
+    <!-- Hire Me Button -->
+    <button class="hire-btn" onclick="location.href='contact.html'">Hire Me</button>
+  </nav>
+</header>
+
+
+  <!-- ===== CONTACT SECTION ===== -->
+  <section class="contact">
+    <h2>Let’s Connect</h2>
+    <p class="intro">
+      Hi, I’m <strong>Abhijeet Yadav</strong> — a dedicated <strong>Full Stack Developer</strong> who believes in
+      creating technology that inspires. I’m always excited to collaborate, share ideas, and build
+      projects that solve real-world problems elegantly.
+    </p>
+
+    <div class="contact-container">
+      <!-- LEFT CARD -->
+      <div class="contact-info">
+        <div>
+          <h3>About Me</h3>
+          
+
+          <div class="info-block">
+            
+            <p>Currently open for freelance projects, internships, and full-time opportunities. 
+               Let’s collaborate and build something great together!</p>
+          </div>
+        </div>
+
+        <div>
+          <h4 style="color:#ffd60a; margin-bottom:10px;">Reach Me At</h4>
+          <p><i class="fas fa-envelope"></i> &nbsp; erabhijeetyada09@gmail.com</p>
+          <p><i class="fas fa-map-marker-alt"></i> &nbsp; Kanpur Nagar, Uttar Pradesh, India</p>
+          <p><i class="fas fa-briefcase"></i> &nbsp; Open to remote work & on-site roles</p>
+
+          <div class="social-links">
+            <a href="https://github.com/AbhijeetYadav09" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/abhijeet-yadav-729333291/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:erabhijeetyada09@gmail.com"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT FORM -->
+      <form
+        id="contactForm"
+        action="mailto:erabhijeetyada09@gmail.com"
+        method="post"
+        enctype="text/plain"
+        class="contact-form"
+      >
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
   </section>
 
+  <!-- ===== FOOTER ===== -->
   <footer>
-    <p>© 2025 Abhijeet Yadav</p>
+    <p>
+      © 2025 Abhijeet Yadav |
+      <a href="https://github.com/AbhijeetYadav09" target="_blank">GitHub</a> |
+      <a href="https://www.linkedin.com/in/abhijeet-yadav-729333291/" target="_blank">LinkedIn</a>
+    </p>
   </footer>
-  <script src="assets/js/script.js"></script>
+  <script>
+  const menu = document.getElementById("mobile-menu");
+  const navLinks = document.querySelector(".nav-links");
+
+  menu.addEventListener("click", () => {
+    menu.classList.toggle("active");
+    navLinks.classList.toggle("active");
+  });
+</script>
+
 </body>
 </html>
