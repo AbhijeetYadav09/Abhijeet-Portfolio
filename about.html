@@ -1,12 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About | Abhijeet Yadav</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* ====== GLOBAL ====== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #0a192f;
+      color: #e0e6ed;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ====== HEADER ====== */
+    header {
+      background-color: #0b1d3a;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 25px;
+      max-width: 1200px;
+      margin: auto;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #00b4d8;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: #f1f1f1;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links .active {
+      color: #ffd60a;
+    }
+
+    #theme-toggle {
+      background: #00b4d8;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      padding: 8px 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    #theme-toggle:hover {
+      transform: rotate(15deg);
+    }
+
+    /* ====== ABOUT SECTION ====== */
+    .about {
+      width: 100%;
+      background: linear-gradient(135deg, #001d3d, #003566);
+      padding: 100px 20px;
+      text-align: center;
+      animation: fadeIn 1s ease;
+    }
+
+    .about h2 {
+      color: #ffd60a;
+      font-size: 2.3rem;
+      margin-bottom: 20px;
+    }
+
+    .about p {
+      max-width: 900px;
+      margin: 0 auto 15px;
+      font-size: 1.1rem;
+      color: #dbe4ee;
+    }
+
+    .about strong {
+      color: #00b4d8;
+    }
+
+    /* ====== MISSION SECTION ====== */
+    .mission {
+      padding: 80px 20px;
+      text-align: center;
+      background: #0b2545;
+    }
+
+    .mission h3 {
+      color: #00b4d8;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .mission p {
+      max-width: 900px;
+      margin: auto;
+      font-size: 1.05rem;
+      color: #d9e3f0;
+    }
+
+    /* ====== SKILLS GRID ====== */
+    .skills-section {
+      background: #001d3d;
+      padding: 90px 20px;
+      text-align: center;
+    }
+
+    .skills-section h3 {
+      color: #ffd60a;
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .skill-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 25px 20px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .skill-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-8px);
+      box-shadow: 0 0 15px rgba(0, 180, 216, 0.3);
+    }
+
+    .skill-card h4 {
+      color: #00b4d8;
+      margin-bottom: 10px;
+    }
+
+    .skill-card p {
+      color: #d9e3f0;
+      font-size: 0.95rem;
+    }
+
+    /* ====== LANGUAGES SECTION ====== */
+    .languages {
+      background: #0b2545;
+      padding: 90px 20px;
+      text-align: center;
+    }
+
+    .languages h3 {
+      color: #ffd60a;
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    .lang-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .lang-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      width: 180px;
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .lang-card:hover {
+      background: rgba(0, 180, 216, 0.15);
+      transform: translateY(-5px);
+      box-shadow: 0 0 10px rgba(0, 180, 216, 0.3);
+    }
+
+    .lang-card h4 {
+      color: #00b4d8;
+      margin-bottom: 5px;
+    }
+
+    .lang-card p {
+      font-size: 0.9rem;
+      color: #dbe4ee;
+    }
+
+    /* ====== FOOTER ====== */
+    footer {
+      background: #000814;
+      color: #bbb;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #00b4d8;
+    }
+
+    footer a:hover {
+      color: #ffd60a;
+    }
+
+    /* ====== ANIMATION ====== */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 768px) {
+      .about h2 {
+        font-size: 1.9rem;
+      }
+
+      .skills-grid {
+        gap: 15px;
+      }
+
+      .lang-card {
+        width: 150px;
+      }
+    }
+  </style>
 </head>
+
 <body>
+  <!-- ====== HEADER ====== -->
   <header>
     <nav class="navbar">
       <h1 class="logo">Abhijeet Yadav</h1>
@@ -21,23 +281,89 @@
     </nav>
   </header>
 
-  <section class="content">
+  <!-- ====== ABOUT SECTION ====== -->
+  <section class="about">
     <h2>About Me</h2>
-    <p>I’m <strong>Abhijeet Yadav</strong>, a B.Tech Computer Science student at Dr. A.P.J. Abdul Kalam Technical University, Lucknow (2025 batch).</p>
-    <p>I specialize in building clean, responsive web applications and have a strong interest in cybersecurity and backend technologies.</p>
-
-    <h3>Skills</h3>
-    <ul class="skills">
-      <li>HTML</li><li>CSS</li><li>JavaScript</li>
-      <li>Python</li><li>React</li><li>C</li><li>C#</li>
-      <li>Syncfusion</li><li>Blazor</li><li>Radzen</li>
-      <li>Bootstrap</li><li>Tailwind CSS</li>
-    </ul>
+    <p>I’m <strong>Abhijeet Yadav</strong>, a <strong>Full Stack Developer</strong> and B.Tech Computer Science student at <strong>Dr. A.P.J. Abdul Kalam Technical University, Lucknow</strong> (Batch 2025).</p>
+    <p>I love creating dynamic, responsive, and high-performance web applications using modern technologies. 
+    I specialize in crafting clean UI experiences and integrating them with secure, scalable backend systems.</p>
+    <p>As a developer, I enjoy exploring new frameworks and tools — whether it’s <strong>Blazor</strong> and <strong>Syncfusion</strong> for .NET, or <strong>React</strong> and <strong>Tailwind</strong> in the JavaScript world. 
+    My mission is to bridge design and functionality seamlessly.</p>
   </section>
 
+  <!-- ====== MISSION SECTION ====== -->
+  <section class="mission">
+    <h3>My Mission & Vision</h3>
+    <p>To build software that doesn’t just solve problems — but inspires innovation.  
+    I believe in writing code that’s efficient, elegant, and impactful. Every project I take on is an opportunity to push boundaries, learn continuously, and deliver meaningful digital experiences.</p>
+  </section>
+
+  <!-- ====== SKILLS SECTION ====== -->
+  <section class="skills-section">
+    <h3>What I Do</h3>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h4>💻 Frontend Development</h4>
+        <p>Creating pixel-perfect, user-friendly interfaces with React, Blazor, Bootstrap, and Tailwind.</p>
+      </div>
+      <div class="skill-card">
+        <h4>⚙️ Backend Development</h4>
+        <p>Developing fast, secure APIs and backend systems using C#, Python, and modern frameworks.</p>
+      </div>
+      <div class="skill-card">
+        <h4>🧠 Problem Solving</h4>
+        <p>Writing efficient algorithms and debugging complex issues with a structured, logical approach.</p>
+      </div>
+      <div class="skill-card">
+        <h4>☁️ Full Stack Integration</h4>
+        <p>Delivering seamless end-to-end web solutions with strong UI, secure backend, and cloud support.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== LANGUAGES SECTION ====== -->
+  <section class="languages">
+    <h3>Languages I Work With</h3>
+    <div class="lang-cards">
+      <div class="lang-card">
+        <h4>HTML</h4>
+        <p>Foundation of every web structure I build.</p>
+      </div>
+      <div class="lang-card">
+        <h4>CSS</h4>
+        <p>Bringing design and animation to life with precision.</p>
+      </div>
+      <div class="lang-card">
+        <h4>JavaScript</h4>
+        <p>Dynamic interactivity and logic in every front-end.</p>
+      </div>
+      <div class="lang-card">
+        <h4>Python</h4>
+        <p>Used for automation, APIs, and data-centric solutions.</p>
+      </div>
+      <div class="lang-card">
+        <h4>C / C#</h4>
+        <p>Powering robust backend systems and logic handling.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
   <footer>
-    <p>© 2025 Abhijeet Yadav</p>
+    <p>© 2025 Abhijeet Yadav | 
+      <a href="https://github.com/AbhijeetYadav09" target="_blank">GitHub</a> | 
+      <a href="https://www.linkedin.com/in/abhijeet-yadav-729333291/" target="_blank">LinkedIn</a>
+    </p>
   </footer>
-  <script src="assets/js/script.js"></script>
+
+  <script>
+    // Theme toggle
+    const toggleBtn = document.getElementById('theme-toggle');
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('alt');
+      document.body.style.background = 
+        document.body.classList.contains('alt') ? "#001d3d" : "#0a192f";
+    });
+  </script>
 </body>
 </html>
