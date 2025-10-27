@@ -4,6 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact | Abhijeet Yadav</title>
+
+  <!-- FontAwesome Icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
   <style>
     /* ===== GLOBAL ===== */
     * {
@@ -42,6 +49,7 @@
       max-width: 1200px;
       margin: auto;
       flex-wrap: wrap;
+      position: relative;
     }
 
     .logo {
@@ -56,18 +64,17 @@
       gap: 1.5rem;
     }
 
-    .nav-links a {
+    .nav-links li a {
       color: #f1f1f1;
       font-weight: 500;
       transition: 0.3s;
     }
 
-    .nav-links a:hover,
+    .nav-links li a:hover,
     .nav-links .active {
       color: #ffd60a;
     }
 
-    /* New modern portfolio button */
     .hire-btn {
       background: linear-gradient(90deg, #00b4d8, #0096c7);
       color: white;
@@ -247,151 +254,83 @@
 
     /* ===== ANIMATION ===== */
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ===== RESPONSIVE ===== */
+    /* ===== MOBILE MENU ===== */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      position: relative;
+      z-index: 1001;
+    }
+
+    .bar {
+      height: 3px;
+      width: 25px;
+      background: #00b4d8;
+      margin: 4px 0;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
     @media (max-width: 768px) {
-      .contact h2 {
-        font-size: 2rem;
+      .menu-toggle {
+        display: flex;
       }
 
-      .contact-container {
+      .nav-links {
+        display: none;
         flex-direction: column;
-        align-items: center;
-      }
-
-      .contact-info,
-      .contact-form {
+        position: absolute;
+        top: 70px;
+        left: 0;
         width: 100%;
+        background: rgba(0, 29, 61, 0.97);
+        text-align: center;
+        padding: 20px 0;
       }
+
+      .nav-links.active {
+        display: flex;
+        animation: slideDown 0.3s ease forwards;
+      }
+
+      @keyframes slideDown {
+        from { transform: translateY(-15px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+      }
+
+      .hire-btn { display: none; }
     }
-    /* ===== NAVBAR BASE ===== */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 25px;
-  max-width: 1200px;
-  margin: auto;
-  flex-wrap: wrap;
-  position: relative;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-}
-
-.nav-links li a {
-  color: #f1f1f1;
-  text-decoration: none;
-  font-weight: 500;
-  transition: 0.3s;
-}
-
-.nav-links li a:hover,
-.nav-links .active {
-  color: #ffd60a;
-}
-
-/* ===== HAMBURGER ===== */
-.menu-toggle {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  position: relative;
-  z-index: 1001;
-}
-
-.bar {
-  height: 3px;
-  width: 25px;
-  background: #00b4d8;
-  margin: 4px 0;
-  border-radius: 3px;
-  transition: all 0.3s ease;
-}
-
-/* ===== MOBILE MENU ACTIVE ===== */
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: flex;
-  }
-
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    background: rgba(0, 29, 61, 0.97);
-    text-align: center;
-    padding: 20px 0;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-  }
-
-  .nav-links.active {
-    display: flex;
-    animation: slideDown 0.3s ease forwards;
-  }
-
-  @keyframes slideDown {
-    from {
-      transform: translateY(-15px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-
-  .hire-btn {
-    display: none; /* hide hire button in mobile menu header */
-  }
-}
-
   </style>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
   <!-- ===== HEADER ===== -->
   <header>
-  <nav class="navbar">
-    <h1 class="logo">Abhijeet Yadav</h1>
+    <nav class="navbar">
+      <h1 class="logo">Abhijeet Yadav</h1>
 
-    <!-- Hamburger Icon -->
-    <div class="menu-toggle" id="mobile-menu">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </div>
+      <div class="menu-toggle" id="mobile-menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
 
-    <!-- Navigation Links -->
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="certificates.html">Certificates</a></li>
-      <li><a href="contact.html" class="active">Contact</a></li>
-    </ul>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="certificates.html">Certificates</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
 
-    <!-- Hire Me Button -->
-    <button class="hire-btn" onclick="location.href='contact.html'">Hire Me</button>
-  </nav>
-</header>
-
+      <button class="hire-btn" onclick="location.href='contact.html'">Hire Me</button>
+    </nav>
+  </header>
 
   <!-- ===== CONTACT SECTION ===== -->
   <section class="contact">
@@ -407,10 +346,7 @@
       <div class="contact-info">
         <div>
           <h3>About Me</h3>
-          
-
           <div class="info-block">
-            
             <p>Currently open for freelance projects, internships, and full-time opportunities. 
                Let’s collaborate and build something great together!</p>
           </div>
@@ -425,21 +361,15 @@
           <div class="social-links">
             <a href="https://github.com/AbhijeetYadav09" target="_blank"><i class="fab fa-github"></i></a>
             <a href="https://www.linkedin.com/in/abhijeet-yadav-729333291/" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="mailto:erabhijeetyada09@gmail.com"><i class="fas fa-envelope"></i></a>
+            <a href="mailto:erabhijeetyadav09@gmail.com"><i class="fas fa-envelope"></i></a>
           </div>
         </div>
       </div>
 
       <!-- RIGHT FORM -->
-      <form
-        id="contactForm"
-        action="mailto:erabhijeetyadav09@gmail.com"
-        method="post"
-        enctype="text/plain"
-        class="contact-form"
-      >
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
+      <form id="contactForm" class="contact-form">
+        <input type="text" name="from_name" placeholder="Your Name" required />
+        <input type="email" name="from_email" placeholder="Your Email" required />
         <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
         <button type="submit">Send Message</button>
       </form>
@@ -454,15 +384,34 @@
       <a href="https://www.linkedin.com/in/abhijeet-yadav-729333291/" target="_blank">LinkedIn</a>
     </p>
   </footer>
+
+  <!-- ===== SCRIPTS ===== -->
   <script>
-  const menu = document.getElementById("mobile-menu");
-  const navLinks = document.querySelector(".nav-links");
+    // Navbar Toggle
+    const menu = document.getElementById("mobile-menu");
+    const navLinks = document.querySelector(".nav-links");
+    menu.addEventListener("click", () => {
+      menu.classList.toggle("active");
+      navLinks.classList.toggle("active");
+    });
 
-  menu.addEventListener("click", () => {
-    menu.classList.toggle("active");
-    navLinks.classList.toggle("active");
-  });
-</script>
+    // Initialize EmailJS
+    emailjs.init("z8vBxf1u4xCBGiIEo"); // <-- Replace with your EmailJS Public Key
 
+    const form = document.getElementById("contactForm");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      emailjs.sendForm("service_3dccxto", "template_t1q9i4d", this)
+        .then(() => {
+          alert("✅ Message sent successfully! I’ll get back to you soon.");
+          form.reset();
+        }, (error) => {
+          console.error("❌ Failed to send message:", error);
+          alert("❌ Something went wrong. Please try again later.");
+        });
+    });
+  </script>
 </body>
 </html>
