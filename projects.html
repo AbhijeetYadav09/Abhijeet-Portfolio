@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects | Abhijeet Yadav</title>
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
     /* ====== GLOBAL ====== */
     * {
@@ -111,49 +113,101 @@
       border-radius: 15px;
       padding: 30px 25px;
       text-align: left;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       position: relative;
       overflow: hidden;
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 180, 216, 0.1), rgba(255, 214, 10, 0.1));
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: 0;
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
     }
 
     .project-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 0 15px rgba(0, 180, 216, 0.3);
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(0, 180, 216, 0.4);
       background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(0, 180, 216, 0.5);
     }
 
     .project-card h3 {
       color: #00b4d8;
       margin-bottom: 10px;
       font-size: 1.4rem;
+      position: relative;
+      z-index: 1;
+      transition: color 0.3s;
+    }
+
+    .project-card:hover h3 {
+      color: #ffd60a;
     }
 
     .project-card p {
       color: #dbe4ee;
       font-size: 0.98rem;
       margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
     }
 
     .tech-stack {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
+      position: relative;
+      z-index: 1;
     }
 
     .tech-tag {
-      background: rgba(0, 180, 216, 0.1);
+      background: rgba(0, 180, 216, 0.15);
       border: 1px solid rgba(0, 180, 216, 0.3);
       color: #00b4d8;
       font-size: 0.85rem;
       padding: 6px 12px;
       border-radius: 20px;
-      transition: 0.3s;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tech-tag::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(0, 180, 216, 0.4);
+      transform: translate(-50%, -50%);
+      transition: width 0.3s, height 0.3s;
+    }
+
+    .tech-tag:hover::before {
+      width: 100%;
+      height: 100%;
     }
 
     .tech-tag:hover {
       background: #00b4d8;
       color: #001d3d;
-      box-shadow: 0 0 10px rgba(0, 180, 216, 0.5);
+      box-shadow: 0 0 15px rgba(0, 180, 216, 0.5);
+      transform: translateY(-2px) scale(1.05);
     }
 
     /* ====== FEATURED BANNER ====== */
@@ -358,7 +412,7 @@
     <h2>My Projects</h2>
 
     <div class="project-grid">
-      <div class="project-card">
+      <div class="project-card" data-aos="fade-up">
         <h3>Online Job Portal</h3>
         <p>A responsive platform that connects job seekers and employers — allowing users to search, apply, and post jobs efficiently.</p>
         <div class="tech-stack">
@@ -370,7 +424,7 @@
         </div>
       </div>
 
-      <div class="project-card">
+      <div class="project-card" data-aos="fade-up" data-aos-delay="100">
         <h3>Folk Tech Aware</h3>
         <p>A cybersecurity awareness platform educating users about safe digital practices through articles, simulations, and quizzes.</p>
         <div class="tech-stack">
@@ -381,7 +435,7 @@
         </div>
       </div>
 
-     <div class="project-card">
+     <div class="project-card" data-aos="fade-up" data-aos-delay="200">
   <h3>Sip-Roastery</h3>
   <p>A responsive coffee shop website built with HTML, CSS, and JavaScript — featuring an interactive menu, order system, and dynamic user-owner profiles.</p>
   <div class="tech-stack">
@@ -393,7 +447,7 @@
 </div>
 
 
-      <div class="project-card">
+      <div class="project-card" data-aos="fade-up" data-aos-delay="300">
         <h3>TradeState</h3>
         <p>A stock trading simulation web app where users can track prices, make virtual trades, and analyze performance with live data.</p>
         <div class="tech-stack">
@@ -408,7 +462,7 @@
         </div>
       </div>
 
-      <div class="project-card">
+      <div class="project-card" data-aos="fade-up" data-aos-delay="400">
         <h3>CollegeFest</h3>
         <p>A dynamic college event management site with registration, live updates, and interactive photo galleries for tech fests.</p>
         <div class="tech-stack">
@@ -419,7 +473,7 @@
         </div>
       </div>
 
-      <div class="project-card">
+      <div class="project-card" data-aos="fade-up" data-aos-delay="500">
         <h3>Portfolio Website</h3>
         <p>This personal portfolio website — designed to showcase my work, skills, and creativity in a modern, interactive layout.</p>
         <div class="tech-stack">
@@ -445,13 +499,72 @@
     </p>
   </footer>
 
+  <!-- AOS Animation Library -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
   <script>
+  // Initialize AOS
+  AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true,
+    offset: 100
+  });
+
+  // Mobile Menu Toggle
   const menu = document.getElementById("mobile-menu");
   const navLinks = document.querySelector(".nav-links");
 
   menu.addEventListener("click", () => {
     menu.classList.toggle("active");
     navLinks.classList.toggle("active");
+  });
+
+  // Add parallax effect to project cards
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = (y - centerY) / 20;
+      const rotateY = (centerX - x) / 20;
+      
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-12px) scale(1.02)`;
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
+    });
+  });
+
+  // Smooth scroll for navigation
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
+  // Navbar background change on scroll
+  window.addEventListener('scroll', function() {
+    const header = document.querySelector('header');
+    if (window.scrollY > 100) {
+      header.style.background = 'rgba(11, 29, 58, 0.95)';
+      header.style.backdropFilter = 'blur(10px)';
+    } else {
+      header.style.background = '#0b1d3a';
+      header.style.backdropFilter = 'none';
+    }
   });
 </script>
 

@@ -73,23 +73,19 @@
       color: #ffd60a;
     }
 
-    .hire-btn {
-      background: linear-gradient(90deg, #00b4d8, #0096c7);
+    #theme-toggle {
+      background: #00b4d8;
       color: white;
       border: none;
-      border-radius: 30px;
-      padding: 10px 22px;
-      font-size: 0.95rem;
+      border-radius: 50%;
+      padding: 8px 10px;
+      font-size: 1rem;
       cursor: pointer;
-      transition: 0.3s;
-      font-weight: 600;
-      letter-spacing: 0.5px;
+      transition: transform 0.3s;
     }
 
-    .hire-btn:hover {
-      background: linear-gradient(90deg, #ffd60a, #ffc300);
-      color: #001d3d;
-      transform: scale(1.05);
+    #theme-toggle:hover {
+      transform: rotate(15deg);
     }
 
     /* ====== ABOUT SECTION ====== */
@@ -416,12 +412,28 @@
     .skill-card:hover h4 {
       color: #ffd60a;
     }
+.hire-btn {
+  background: linear-gradient(90deg, #00b4d8, #0096c7);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 22px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.hire-btn:hover {
+  background: linear-gradient(90deg, #ffd60a, #ffc300);
+  color: #001d3d;
+  transform: scale(1.05);
+}
 
     .skill-card p {
       color: #d9e3f0;
       font-size: 0.95rem;
-      position: relative;
-      z-index: 1;
     }
 
     /* ====== LANGUAGES SECTION ====== */
@@ -593,178 +605,140 @@
         display: none;
       }
     }
-
     /* ===== NAVBAR BASE ===== */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 25px;
-      max-width: 1200px;
-      margin: auto;
-      flex-wrap: wrap;
-      position: relative;
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  max-width: 1200px;
+  margin: auto;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links li a {
+  color: #f1f1f1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-links li a:hover,
+.nav-links .active {
+  color: #ffd60a;
+}
+
+/* ===== HAMBURGER ===== */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  position: relative;
+  z-index: 1001;
+}
+
+.bar {
+  height: 3px;
+  width: 25px;
+  background: #00b4d8;
+  margin: 4px 0;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+/* ===== MOBILE MENU ACTIVE ===== */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 29, 61, 0.97);
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  }
+
+  .nav-links.active {
+    display: flex;
+    animation: slideDown 0.3s ease forwards;
+  }
+
+  @keyframes slideDown {
+    from {
+      transform: translateY(-15px);
+      opacity: 0;
     }
-
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
+    to {
+      transform: translateY(0);
+      opacity: 1;
     }
+  }
 
-    .nav-links li a {
-      color: #f1f1f1;
-      text-decoration: none;
-      font-weight: 500;
-      transition: 0.3s;
-    }
+  .hire-btn {
+    display: none; /* hide hire button in mobile menu header */
+  }
+}
 
-    .nav-links li a:hover,
-    .nav-links .active {
-      color: #ffd60a;
-    }
-
-    /* ===== HAMBURGER ===== */
-    .menu-toggle {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      position: relative;
-      z-index: 1001;
-    }
-
-    .bar {
-      height: 3px;
-      width: 25px;
-      background: #00b4d8;
-      margin: 4px 0;
-      border-radius: 3px;
-      transition: all 0.3s ease;
-    }
-
-    /* ===== MOBILE MENU ACTIVE ===== */
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: flex;
-      }
-
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        background: rgba(0, 29, 61, 0.97);
-        text-align: center;
-        padding: 20px 0;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-      }
-
-      .nav-links.active {
-        display: flex;
-        animation: slideDown 0.3s ease forwards;
-      }
-
-      @keyframes slideDown {
-        from {
-          transform: translateY(-15px);
-          opacity: 0;
-        }
-        to {
-          transform: translateY(0);
-          opacity: 1;
-        }
-      }
-
-      .hire-btn {
-        display: none;
-      }
-    }
   </style>
 </head>
 
 <body>
   <!-- ====== HEADER ====== -->
   <header>
-    <nav class="navbar">
-      <h1 class="logo">Abhijeet Yadav</h1>
+  <nav class="navbar">
+    <h1 class="logo">Abhijeet Yadav</h1>
 
-      <div class="menu-toggle" id="mobile-menu">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </div>
+    <!-- Hamburger Icon -->
+    <div class="menu-toggle" id="mobile-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
 
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html" class="active">About</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="certificates.html">Certificates</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
+    <!-- Navigation Links -->
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="certificates.html">Certificates</a></li>
+      <li><a href="contact.html" >Contact</a></li>
+    </ul>
 
-      <button class="hire-btn" onclick="location.href='contact.html'">Hire Me</button>
-    </nav>
-  </header>
+    <!-- Hire Me Button -->
+    <button class="hire-btn" onclick="location.href='contact.html'">Hire Me</button>
+  </nav>
+</header>
+
 
   <!-- ====== ABOUT SECTION ====== -->
   <section class="about">
-    <div class="about-container">
-      <!-- Left: Profile Section -->
-      <div class="profile-section" data-aos="fade-right">
-        <div class="profile-image-wrapper">
-          <img src="https://ui-avatars.com/api/?name=Abhijeet+Yadav&size=280&background=00b4d8&color=fff&bold=true&font-size=0.4" 
-               alt="Abhijeet Yadav" 
-               class="profile-image">
-        </div>
-        
-        <div class="profile-stats">
-          <div class="stat-item">
-            <span class="stat-number">6+</span>
-            <span class="stat-label">Projects</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number">9+</span>
-            <span class="stat-label">Certificates</span>
-          </div>
-          <div class="stat-item">
-            <span class="stat-number">2025</span>
-            <span class="stat-label">Graduate</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right: About Content -->
-      <div class="about-content" data-aos="fade-left">
-        <h2>About Me</h2>
-        
-        <div class="info-card" data-aos="fade-up" data-aos-delay="100">
-          <i class="fas fa-user-graduate"></i>
-          <p>I'm <strong>Abhijeet Yadav</strong>, a passionate <span class="highlight-text">Full Stack Developer</span> and B.Tech Computer Science student at <strong>Dr. A.P.J. Abdul Kalam Technical University, Lucknow</strong> (Batch 2025).</p>
-        </div>
-
-        <div class="info-card" data-aos="fade-up" data-aos-delay="200">
-          <i class="fas fa-code"></i>
-          <p>I love creating <span class="highlight-text">dynamic, responsive, and high-performance</span> web applications using modern technologies. I specialize in crafting clean UI experiences and integrating them with secure, scalable backend systems.</p>
-        </div>
-
-        <div class="info-card" data-aos="fade-up" data-aos-delay="300">
-          <i class="fas fa-rocket"></i>
-          <p>As a developer, I enjoy exploring new frameworks and tools — whether it's <strong>Blazor</strong> and <strong>Syncfusion</strong> for .NET, or <strong>React</strong> and <strong>Tailwind</strong> in the JavaScript world. My mission is to <span class="highlight-text">bridge design and functionality seamlessly</span>.</p>
-        </div>
-      </div>
-    </div>
+    <h2>About Me</h2>
+    <p>I’m <strong>Abhijeet Yadav</strong>, a <strong>Full Stack Developer</strong> and B.Tech Computer Science student at <strong>Dr. A.P.J. Abdul Kalam Technical University, Lucknow</strong> (Batch 2025).</p>
+    <p>I love creating dynamic, responsive, and high-performance web applications using modern technologies. 
+    I specialize in crafting clean UI experiences and integrating them with secure, scalable backend systems.</p>
+    <p>As a developer, I enjoy exploring new frameworks and tools — whether it’s <strong>Blazor</strong> and <strong>Syncfusion</strong> for .NET, or <strong>React</strong> and <strong>Tailwind</strong> in the JavaScript world. 
+    My mission is to bridge design and functionality seamlessly.</p>
   </section>
 
   <!-- ====== MISSION SECTION ====== -->
   <section class="mission">
-    <div class="mission-content" data-aos="zoom-in">
-      <h3>My Mission & Vision</h3>
-      <div class="mission-box">
-        <p>To build software that doesn't just <strong>solve problems</strong> — but <strong>inspires innovation</strong>. I believe in writing code that's efficient, elegant, and impactful. Every project I take on is an opportunity to push boundaries, learn continuously, and deliver <span class="highlight-text">meaningful digital experiences</span>.</p>
-      </div>
-    </div>
+    <h3>My Mission & Vision</h3>
+    <p>To build software that doesn’t just solve problems — but inspires innovation.  
+    I believe in writing code that’s efficient, elegant, and impactful. Every project I take on is an opportunity to push boundaries, learn continuously, and deliver meaningful digital experiences.</p>
   </section>
 
   <!-- ====== SKILLS SECTION ====== -->
@@ -792,86 +766,27 @@
 
   <!-- ====== LANGUAGES SECTION ====== -->
   <section class="languages">
-    <h3>Technologies & Languages</h3>
+    <h3>Languages I Work With</h3>
     <div class="lang-cards">
       <div class="lang-card" data-aos="flip-left">
-        <div class="lang-icon">
-          <i class="devicon-html5-plain colored"></i>
-        </div>
-        <h4>HTML5</h4>
-        <p>Semantic markup & structure</p>
+        <h4>HTML</h4>
+        <p>Foundation of every web structure I build.</p>
       </div>
-      
-      <div class="lang-card" data-aos="flip-left" data-aos-delay="50">
-        <div class="lang-icon">
-          <i class="devicon-css3-plain colored"></i>
-        </div>
-        <h4>CSS3</h4>
-        <p>Modern styling & animations</p>
-      </div>
-      
       <div class="lang-card" data-aos="flip-left" data-aos-delay="100">
-        <div class="lang-icon">
-          <i class="devicon-javascript-plain colored"></i>
-        </div>
-        <h4>JavaScript</h4>
-        <p>Dynamic & interactive web apps</p>
+        <h4>CSS</h4>
+        <p>Bringing design and animation to life with precision.</p>
       </div>
-      
-      <div class="lang-card" data-aos="flip-left" data-aos-delay="150">
-        <div class="lang-icon">
-          <i class="devicon-python-plain colored"></i>
-        </div>
-        <h4>Python</h4>
-        <p>Backend & automation</p>
-      </div>
-      
       <div class="lang-card" data-aos="flip-left" data-aos-delay="200">
-        <div class="lang-icon">
-          <i class="devicon-csharp-plain colored"></i>
-        </div>
-        <h4>C#</h4>
-        <p>.NET & backend systems</p>
+        <h4>JavaScript</h4>
+        <p>Dynamic interactivity and logic in every front-end.</p>
       </div>
-      
-      <div class="lang-card" data-aos="flip-left" data-aos-delay="250">
-        <div class="lang-icon">
-          <i class="devicon-react-original colored"></i>
-        </div>
-        <h4>React</h4>
-        <p>Component-based UIs</p>
-      </div>
-      
       <div class="lang-card" data-aos="flip-left" data-aos-delay="300">
-        <div class="lang-icon">
-          <i class="devicon-nodejs-plain colored"></i>
-        </div>
-        <h4>Node.js</h4>
-        <p>Server-side JavaScript</p>
+        <h4>Python</h4>
+        <p>Used for automation, APIs, and data-centric solutions.</p>
       </div>
-      
-      <div class="lang-card" data-aos="flip-left" data-aos-delay="350">
-        <div class="lang-icon">
-          <i class="devicon-mongodb-plain colored"></i>
-        </div>
-        <h4>MongoDB</h4>
-        <p>NoSQL database</p>
-      </div>
-      
       <div class="lang-card" data-aos="flip-left" data-aos-delay="400">
-        <div class="lang-icon">
-          <i class="devicon-mysql-plain colored"></i>
-        </div>
-        <h4>MySQL</h4>
-        <p>Relational database</p>
-      </div>
-      
-      <div class="lang-card" data-aos="flip-left" data-aos-delay="450">
-        <div class="lang-icon">
-          <i class="devicon-git-plain colored"></i>
-        </div>
-        <h4>Git</h4>
-        <p>Version control</p>
+        <h4>C / C#</h4>
+        <p>Powering robust backend systems and logic handling.</p>
       </div>
     </div>
   </section>
