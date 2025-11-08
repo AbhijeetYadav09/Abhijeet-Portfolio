@@ -108,11 +108,29 @@
       color: #00b4d8;
       cursor: pointer;
       transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #00b4d8;
+      box-shadow: 0 0 15px rgba(0, 180, 216, 0.5);
+      transition: all 0.3s;
     }
 
     .logo:hover {
       transform: scale(1.05);
       text-shadow: 0 0 20px rgba(0, 180, 216, 0.5);
+    }
+
+    .logo:hover .logo-img {
+      box-shadow: 0 0 25px rgba(0, 180, 216, 0.8);
+      transform: rotate(360deg);
     }
 
     .nav-links {
@@ -696,7 +714,10 @@
   <!-- ====== HEADER ====== -->
  <header>
   <nav class="navbar">
-    <h1 class="logo">Abhijeet Yadav</h1>
+    <div class="logo">
+      <img src="assets/images/profile.jpg" alt="AY" class="logo-img">
+      <span>Abhijeet Yadav</span>
+    </div>
 
     <!-- Hamburger Icon -->
     <div class="menu-toggle" id="mobile-menu">
