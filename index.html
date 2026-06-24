@@ -487,70 +487,155 @@
     }
 
     .github-cards {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 16px;
       margin-top: 36px;
-    }
-
-    .github-stat-card {
-      background: #0d1117;
-      border: 1px solid #30363d;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
     }
 
     .github-contrib-card {
       background: #0d1117;
       border: 1px solid #30363d;
       border-radius: var(--radius-lg);
-      padding: 24px 28px;
+      padding: 20px 22px;
       overflow: hidden;
     }
 
     .github-contrib-label {
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       font-weight: 600;
-      color: var(--text-muted);
+      color: #7d8590;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .github-contrib-label { color: #7d8590; }
-    .github-contrib-label i { color: #39d353; }
+    .github-contrib-label i { color: #39d353; font-size: 0.55rem; }
 
-    .github-contrib-card img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 8px;
+    /* Calendar heatmap */
+    .cal-month-row {
+      display: flex;
+      gap: 0;
+      margin-bottom: 5px;
+      padding-left: 22px;
+      min-height: 14px;
+      position: relative;
+    }
+
+    .cal-month-label {
+      font-size: 0.65rem;
+      color: #7d8590;
+      position: absolute;
+    }
+
+    .cal-body {
+      display: flex;
+      gap: 0;
+      align-items: flex-start;
+    }
+
+    .cal-day-labels {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin-right: 5px;
+      padding-top: 0;
+    }
+
+    .cal-day-label {
+      font-size: 0.6rem;
+      color: #7d8590;
+      height: 10px;
+      line-height: 10px;
+    }
+
+    .cal-grid {
+      display: flex;
+      gap: 2px;
+      flex: 1;
+    }
+
+    .cal-week {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .cal-cell {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      flex-shrink: 0;
+      cursor: default;
+      transition: outline 0.1s;
+    }
+
+    .cal-cell:hover { outline: 1px solid rgba(255,255,255,0.35); }
+
+    .cal-legend {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 10px;
+      justify-content: flex-end;
+      font-size: 0.65rem;
+      color: #7d8590;
+    }
+
+    .cal-legend-cell {
+      width: 10px; height: 10px;
+      border-radius: 2px;
     }
 
     .github-achievements {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
-      margin-top: 16px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid #21262d;
     }
 
     .achievement-pill {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
+      gap: 5px;
+      padding: 4px 11px;
       border-radius: 100px;
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       font-weight: 600;
       background: rgba(139,92,246,0.1);
       border: 1px solid rgba(139,92,246,0.2);
       color: #c4b5fd;
     }
 
-    .achievement-pill i { font-size: 0.8rem; }
+    .achievement-pill i { font-size: 0.72rem; }
+
+    /* Activity line chart card */
+    .github-activity-card {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: var(--radius-lg);
+      padding: 20px 22px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .github-activity-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      flex: 1;
+    }
+
+    @media (max-width: 768px) {
+      .github-cards { grid-template-columns: 1fr; }
+    }
 
     /* ====== CTA ====== */
     .cta-section {
@@ -909,10 +994,10 @@
           2,924+ contributions in the last year
         </div>
         <img
-          src="https://github-readme-activity-graph.vercel.app/graph?username=AbhijeetYadav09&bg_color=0d1117&color=39d353&line=26a641&point=39d353&area=true&area_color=0e4429&hide_border=true&radius=4&custom_title=Contribution+Activity"
+          src="https://github-readme-activity-graph.vercel.app/graph?username=AbhijeetYadav09&bg_color=0d1117&color=39d353&line=26a641&point=39d353&area=true&area_color=0e4429&hide_border=true&radius=4&custom_title=Contribution+Activity&height=220"
           alt="GitHub Contribution Activity Graph"
           loading="lazy"
-          style="border-radius:8px; width:100%;"
+          style="border-radius:8px; width:100%; max-height:220px; object-fit:cover;"
           onerror="this.parentElement.style.display='none'"
         />
         <div class="github-achievements">
@@ -922,15 +1007,22 @@
         </div>
       </div>
 
-      <!-- GitHub Stats card — silently hides itself if API is down -->
-      <div class="github-stat-card" id="githubStatsCard">
-        <img
-          src="https://github-readme-stats.vercel.app/api?username=AbhijeetYadav09&show_icons=true&bg_color=0d1117&title_color=8b5cf6&icon_color=39d353&text_color=c9d1d9&border_color=30363d&hide_border=false&count_private=true&include_all_commits=true&rank_icon=github"
-          alt="Abhijeet's GitHub Stats"
-          loading="lazy"
-          style="width:100%; height:auto; display:block; border-radius:var(--radius-lg);"
-          onerror="document.getElementById('githubStatsCard').style.display='none'"
-        />
+      <!-- Contribution Heatmap (JS-rendered) -->
+      <div class="github-contrib-card" id="contribHeatmapCard">
+        <div class="github-contrib-label">
+          <i class="fas fa-circle"></i>
+          Contributions — Last Year
+        </div>
+        <div id="contribCalendar" style="overflow-x:auto; padding:4px 0;"></div>
+        <div class="cal-legend" style="margin-top:8px; display:flex; align-items:center; gap:5px; font-size:11px; color:#8b949e;">
+          <span>Less</span>
+          <span class="cal-cell" style="background:#161b22; width:11px; height:11px; border-radius:2px; display:inline-block;"></span>
+          <span class="cal-cell" style="background:#0e4429; width:11px; height:11px; border-radius:2px; display:inline-block;"></span>
+          <span class="cal-cell" style="background:#006d32; width:11px; height:11px; border-radius:2px; display:inline-block;"></span>
+          <span class="cal-cell" style="background:#26a641; width:11px; height:11px; border-radius:2px; display:inline-block;"></span>
+          <span class="cal-cell" style="background:#39d353; width:11px; height:11px; border-radius:2px; display:inline-block;"></span>
+          <span>More</span>
+        </div>
       </div>
 
     </div>
@@ -1017,6 +1109,51 @@
     });
   }, { threshold: 0.5 });
   counters.forEach(c => countObs.observe(c));
+
+  // Contribution heatmap
+  (async () => {
+    const COLORS = ['#161b22','#0e4429','#006d32','#26a641','#39d353'];
+    const container = document.getElementById('contribCalendar');
+    if (!container) return;
+    try {
+      const res = await fetch('https://github-contributions-api.jogruber.de/v4/AbhijeetYadav09?y=last');
+      const data = await res.json();
+      const days = data.contributions;
+      // Group by week
+      const weeks = [];
+      let week = [];
+      // Pad start so first day aligns to correct weekday
+      const firstDay = new Date(days[0].date).getDay();
+      for (let i = 0; i < firstDay; i++) week.push(null);
+      days.forEach(d => {
+        week.push(d);
+        if (week.length === 7) { weeks.push(week); week = []; }
+      });
+      if (week.length) weeks.push(week);
+      // Render grid
+      const grid = document.createElement('div');
+      grid.className = 'cal-grid';
+      weeks.forEach(w => {
+        const col = document.createElement('div');
+        col.className = 'cal-week';
+        w.forEach(d => {
+          const cell = document.createElement('div');
+          cell.className = 'cal-cell';
+          if (d) {
+            cell.style.background = COLORS[d.level] || COLORS[0];
+            cell.title = `${d.date}: ${d.count} contributions`;
+          } else {
+            cell.style.background = 'transparent';
+          }
+          col.appendChild(cell);
+        });
+        grid.appendChild(col);
+      });
+      container.appendChild(grid);
+    } catch(e) {
+      document.getElementById('contribHeatmapCard').style.display = 'none';
+    }
+  })();
 </script>
 </body>
 </html>
