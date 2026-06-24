@@ -493,20 +493,7 @@
       margin-top: 36px;
     }
 
-    .github-stat-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-    }
-
-    .github-stat-card img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .github-contrib-card {
+.github-contrib-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
@@ -906,31 +893,23 @@
     <p class="section-sub" data-aos="fade-up" data-aos-delay="100">Consistent commits, public projects, and a growing open source presence.</p>
 
     <div class="github-cards" data-aos="fade-up" data-aos-delay="150">
-      <!-- Contribution heatmap -->
+      <!-- Contribution heatmap via ghchart (reliable, no auth needed) -->
       <div class="github-contrib-card">
         <div class="github-contrib-label">
           <i class="fas fa-circle"></i>
           2,920+ contributions in the last year
         </div>
         <img
-          src="https://github-readme-activity-graph.vercel.app/graph?username=AbhijeetYadav09&bg_color=111120&color=8b5cf6&line=06b6d4&point=4ade80&area=true&area_color=8b5cf6&hide_border=true&custom_title=Contribution+Activity"
-          alt="GitHub Contribution Graph"
+          src="https://ghchart.rshah.org/4ade80/AbhijeetYadav09"
+          alt="Abhijeet Yadav's GitHub Contribution Chart"
           loading="lazy"
+          style="background:#111120; border-radius:8px; padding:12px;"
         />
         <div class="github-achievements">
           <span class="achievement-pill"><i class="fas fa-trophy"></i> Pull Shark ×3</span>
           <span class="achievement-pill"><i class="fas fa-bolt"></i> YOLO</span>
           <span class="achievement-pill"><i class="fas fa-code-branch"></i> 2,920+ Contributions</span>
         </div>
-      </div>
-
-      <!-- GitHub Stats -->
-      <div class="github-stat-card">
-        <img
-          src="https://github-readme-stats.vercel.app/api?username=AbhijeetYadav09&show_icons=true&theme=transparent&title_color=8b5cf6&icon_color=06b6d4&text_color=eeeeee&border_color=ffffff18&bg_color=111120&hide_border=false&count_private=true&include_all_commits=true"
-          alt="Abhijeet's GitHub Stats"
-          loading="lazy"
-        />
       </div>
     </div>
   </div>
