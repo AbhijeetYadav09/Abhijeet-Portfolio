@@ -3,513 +3,475 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Certificates | Abhijeet Yadav</title>
-  <!-- AOS Animation Library -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <title>Certificates — Abhijeet Yadav</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
-    /* ====== GLOBAL ====== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background-color: #0a192f;
-      color: #e0e6ed;
-      line-height: 1.6;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* ====== HEADER ====== */
-    header {
-      background-color: #0b1d3a;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-    }
-
-    .navbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 25px;
+    /* ====== CERTS HEADER ====== */
+    .certs-header {
+      padding: 100px 24px 64px;
       max-width: 1200px;
-      margin: auto;
-      flex-wrap: wrap;
+      margin: 0 auto;
+      position: relative;
     }
 
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #00b4d8;
+    .certs-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      width: 600px; height: 400px;
+      background: radial-gradient(ellipse, rgba(6,182,212,0.06) 0%, transparent 60%);
+      transform: translateX(-50%);
+      pointer-events: none;
     }
 
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
+    /* ====== STATS ROW ====== */
+    .cert-stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 56px;
     }
 
-    .nav-links a {
-      color: #f1f1f1;
-      font-weight: 500;
-      transition: 0.3s;
-    }
-
-    .nav-links a:hover,
-    .nav-links .active {
-      color: #ffd60a;
-    }
-
-    #theme-toggle {
-      background: #00b4d8;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      padding: 8px 10px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-
-    #theme-toggle:hover {
-      transform: rotate(15deg);
-    }
-
-    /* ====== CERTIFICATES SECTION ====== */
-    .certificates {
-      width: 100%;
-      background: linear-gradient(135deg, #001d3d, #003566);
-      padding: 100px 20px;
+    .cert-stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
       text-align: center;
-      animation: fadeIn 1s ease;
+      transition: var(--transition);
     }
 
-    .certificates h2 {
-      color: #ffd60a;
-      font-size: 2.3rem;
-      margin-bottom: 40px;
+    .cert-stat-card:hover {
+      border-color: var(--border-hover);
     }
 
+    .cert-stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .cert-stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ====== CERT GRID ====== */
     .cert-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      max-width: 1100px;
-      margin: auto;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
     }
 
     .cert-card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      padding: 25px 20px;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      text-align: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      transition: var(--transition);
       position: relative;
       overflow: hidden;
-      backdrop-filter: blur(10px);
-      cursor: pointer;
     }
 
     .cert-card::before {
       content: '';
       position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      background: radial-gradient(circle, rgba(0, 180, 216, 0.2), transparent);
-      transform: translate(-50%, -50%);
-      transition: width 0.5s, height 0.5s;
-      border-radius: 50%;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--cert-color, var(--accent)), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
     }
 
-    .cert-card:hover::before {
-      width: 400px;
-      height: 400px;
-    }
+    .cert-card:hover::before { opacity: 1; }
 
     .cert-card:hover {
-      background: rgba(255, 255, 255, 0.08);
-      transform: translateY(-12px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(0, 180, 216, 0.3);
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-glow);
+      transform: translateY(-4px);
     }
 
-    .cert-icon {
-      font-size: 3.5rem;
-      color: #00b4d8;
-      margin-bottom: 12px;
-      position: relative;
-      z-index: 1;
-      display: inline-block;
-      transition: all 0.3s ease;
+    .cert-issuer-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
     }
 
-    .cert-card:hover .cert-icon {
-      transform: scale(1.1);
-      filter: drop-shadow(0 0 15px rgba(255, 214, 10, 0.6));
+    .cert-issuer-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .issuer-opswat  { background: rgba(6,182,212,0.15);  color: var(--accent-2); }
+    .issuer-tryhack { background: rgba(74,222,128,0.15); color: var(--green); }
+    .issuer-udemy   { background: rgba(251,191,36,0.15); color: var(--yellow); }
+    .issuer-bitten  { background: rgba(139,92,246,0.15); color: var(--accent); }
+    .issuer-up      { background: rgba(248,113,113,0.15); color: var(--red); }
+    .issuer-softpro { background: rgba(139,92,246,0.15); color: var(--accent); }
+
+    .cert-issuer-name {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .cert-id {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 2px;
     }
 
     .cert-title {
-      font-size: 1.1rem;
-      color: #e0e6ed;
-      margin-bottom: 5px;
-      font-weight: 500;
-      position: relative;
-      z-index: 1;
-    }
-
-    .cert-org {
-      color: #ffd60a;
-      font-size: 0.9rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
       margin-bottom: 10px;
-      position: relative;
-      z-index: 1;
+      line-height: 1.35;
     }
 
-    .cert-date {
-      font-size: 0.85rem;
-      color: #adb5bd;
-      margin-bottom: 15px;
-      position: relative;
-      z-index: 1;
+    .cert-desc {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 18px;
     }
 
-    .cert-img {
-      width: 100%;
-      border-radius: 10px;
-      margin-top: 10px;
+    .cert-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
     }
 
-    .credential-btn {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 8px 14px;
-      border-radius: 20px;
-      background: #00b4d8;
-      color: white;
-      font-size: 0.9rem;
-      transition: 0.3s;
+    .cert-year {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .credential-btn:hover {
-      background: #ffd60a;
-      color: #001d3d;
+    .cert-year i { color: var(--accent); }
+
+    .cert-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
     }
 
-    /* ====== BOTTOM MESSAGE ====== */
-    .note {
-      margin-top: 70px;
-      color: #dbe4ee;
-      font-size: 1.05rem;
+    .badge-verified {
+      background: rgba(74,222,128,0.1);
+      color: var(--green);
+      border: 1px solid rgba(74,222,128,0.2);
+    }
+
+    /* ====== NOTE ====== */
+    .cert-note {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    .note-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 36px 40px;
       text-align: center;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.8;
+      position: relative;
+      overflow: hidden;
     }
 
-    /* ====== FOOTER ====== */
-    footer {
-      background: #000814;
-      color: #bbb;
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-      margin-top: 80px;
+    .note-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 50% 100%, rgba(139,92,246,0.06) 0%, transparent 70%);
+      pointer-events: none;
     }
 
-    footer a {
-      color: #00b4d8;
+    .note-box h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
     }
 
-    footer a:hover {
-      color: #ffd60a;
-    }
-
-    /* ====== ANIMATION ====== */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .note-box p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto;
+      line-height: 1.75;
     }
 
     /* ====== RESPONSIVE ====== */
-    @media (max-width: 768px) {
-      .certificates h2 {
-        font-size: 1.9rem;
-      }
-      .cert-card {
-        padding: 20px 15px;
-      }
+    @media (max-width: 1024px) {
+      .cert-stats-row { grid-template-columns: repeat(2, 1fr); }
+      .cert-grid { grid-template-columns: repeat(2, 1fr); }
     }
-    .hire-btn {
-  background: linear-gradient(90deg, #00b4d8, #0096c7);
-  color: white;
-  border: none;
-  border-radius: 30px;
-  padding: 10px 22px;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: 0.3s;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
 
-.hire-btn:hover {
-  background: linear-gradient(90deg, #ffd60a, #ffc300);
-  color: #001d3d;
-  transform: scale(1.05);
-}
-/* ===== NAVBAR BASE ===== */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 25px;
-  max-width: 1200px;
-  margin: auto;
-  flex-wrap: wrap;
-  position: relative;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-}
-
-.nav-links li a {
-  color: #f1f1f1;
-  text-decoration: none;
-  font-weight: 500;
-  transition: 0.3s;
-}
-
-.nav-links li a:hover,
-.nav-links .active {
-  color: #ffd60a;
-}
-
-/* ===== HAMBURGER ===== */
-.menu-toggle {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  position: relative;
-  z-index: 1001;
-}
-
-.bar {
-  height: 3px;
-  width: 25px;
-  background: #00b4d8;
-  margin: 4px 0;
-  border-radius: 3px;
-  transition: all 0.3s ease;
-}
-
-/* ===== MOBILE MENU ACTIVE ===== */
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: flex;
-  }
-
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    background: rgba(0, 29, 61, 0.97);
-    text-align: center;
-    padding: 20px 0;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-  }
-
-  .nav-links.active {
-    display: flex;
-    animation: slideDown 0.3s ease forwards;
-  }
-
-  @keyframes slideDown {
-    from {
-      transform: translateY(-15px);
-      opacity: 0;
+    @media (max-width: 640px) {
+      .certs-header { padding: 80px 20px 48px; }
+      .cert-stats-row, .cert-grid, .cert-note { padding-left: 20px; padding-right: 20px; }
+      .cert-grid { grid-template-columns: 1fr; }
+      .cert-stats-row { grid-template-columns: 1fr 1fr; }
     }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-
-  .hire-btn {
-    display: none; /* hide hire button in mobile menu header */
-  }
-}
-
-
   </style>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
-
 <body>
-  <!-- ====== HEADER ====== -->
- <header>
+
+<!-- ====== NAV ====== -->
+<header>
   <nav class="navbar">
-    <h1 class="logo">Abhijeet Yadav</h1>
-
-    <!-- Hamburger Icon -->
-    <div class="menu-toggle" id="mobile-menu">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </div>
-
-    <!-- Navigation Links -->
-    <ul class="nav-links">
+    <a href="index.html" class="logo">
+      <span class="logo-dot"></span>
+      Abhijeet Yadav
+    </a>
+    <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="projects.html">Projects</a></li>
-      <li><a href="certificates.html">Certificates</a></li>
-      <li><a href="contact.html" >Contact</a></li>
+      <li><a href="certificates.html" class="active">Certificates</a></li>
+      <li><a href="contact.html" class="nav-cta">Hire Me</a></li>
     </ul>
-
-    <!-- Hire Me Button -->
-    <button class="hire-btn" onclick="location.href='contact.html'">Hire Me</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
   </nav>
 </header>
 
+<!-- ====== HEADER ====== -->
+<div class="certs-header" data-aos="fade-up">
+  <p class="section-label">Credentials</p>
+  <h1 class="page-title">Certifications &amp;<br><span class="gradient-text">achievements</span></h1>
+  <p class="page-desc">Nine verified certifications in cybersecurity, web development, and software engineering — from globally recognized institutions and academies.</p>
+</div>
 
-  <!-- ====== CERTIFICATES SECTION ====== -->
-  <section class="certificates">
-    <h2>Certificates</h2>
+<!-- ====== STATS ====== -->
+<div class="cert-stats-row">
+  <div class="cert-stat-card" data-aos="fade-up">
+    <div class="cert-stat-num gradient-text">9+</div>
+    <div class="cert-stat-label">Total Certifications</div>
+  </div>
+  <div class="cert-stat-card" data-aos="fade-up" data-aos-delay="60">
+    <div class="cert-stat-num gradient-text">4</div>
+    <div class="cert-stat-label">OPSWAT Academy</div>
+  </div>
+  <div class="cert-stat-card" data-aos="fade-up" data-aos-delay="120">
+    <div class="cert-stat-num gradient-text">3</div>
+    <div class="cert-stat-label">Security Focused</div>
+  </div>
+  <div class="cert-stat-card" data-aos="fade-up" data-aos-delay="180">
+    <div class="cert-stat-num gradient-text">2024</div>
+    <div class="cert-stat-label">All Earned In</div>
+  </div>
+</div>
 
-    <div class="cert-grid">
-      <div class="cert-card" data-aos="fade-up">
-        <div class="cert-icon">📧</div>
-        <div class="cert-title">Email Security Associate</div>
-        <div class="cert-org">OPSWAT Academy</div>
-        <div class="cert-date">🏅 Certificate: ESA-2024</div>
-      </div>
+<!-- ====== CERT GRID ====== -->
+<div class="cert-grid">
 
-      <div class="cert-card" data-aos="fade-up" data-aos-delay="50">
-        <div class="cert-icon">🎯</div>
-        <div class="cert-title">Ethical Hacking & Cyber Security</div>
-        <div class="cert-org">Bitten Tech</div>
-        <div class="cert-date">🏅 Certificate: EHCS-2024</div>
-      </div>
-
-      <div class="cert-card" data-aos="fade-up" data-aos-delay="100">
-        <div class="cert-icon">🔰</div>
-        <div class="cert-title">Introduction to Critical Infrastructure Protection (ICIP)</div>
-        <div class="cert-org">OPSWAT Academy</div>
-        <div class="cert-date">🏅 Certificate: ICIP-2024</div>
-      </div>
-
-      <div class="cert-card" data-aos="fade-up" data-aos-delay="150">
-        <div class="cert-icon">🛡️</div>
-        <div class="cert-title">CyberSecurity Awareness</div>
-        <div class="cert-org">Uttar Pradesh Police</div>
-        <div class="cert-date">🏅 Certificate: CSA-2024</div>
-      </div>
-
-      <div class="cert-card" data-aos="fade-up" data-aos-delay="200">
-        <div class="cert-icon">🔐</div>
-        <div class="cert-title">Cybersecurity Fundamentals Associate (OCFA)</div>
-        <div class="cert-org">OPSWAT Academy</div>
-        <div class="cert-date">🏅 Certificate: OCFA-2024</div>
-      </div>
-
-      <div class="cert-card" data-aos="fade-up" data-aos-delay="250">
-        <div class="cert-icon">🌐</div>
-        <div class="cert-title">Network Security Associate (ONSA)</div>
-        <div class="cert-org">OPSWAT Academy</div>
-        <div class="cert-date">🏅 Certificate: ONSA-2024</div>
-      </div>
-
-      <div class="cert-card" data-aos="fade-up" data-aos-delay="300">
-        <div class="cert-icon">🐍</div>
-        <div class="cert-title">Python Programming</div>
-        <div class="cert-org">Softpro India Computer Technologies Pvt. Ltd.</div>
-        <div class="cert-date">🏅 Certificate: PY-2024</div>
-      </div>
-
-      <!-- ====== NEW CERTIFICATES ====== -->
-      <div class="cert-card" data-aos="fade-up" data-aos-delay="350">
-        <div class="cert-icon">💻</div>
-        <div class="cert-title">Complete Web Development Course</div>
-        <div class="cert-org">Udemy</div>
-        <div class="cert-date">🏅 Certificate: WEB-2024</div>
-       
-      </div>
-
-      <div class="cert-card" data-aos="fade-up" data-aos-delay="400">
-        <div class="cert-icon">🔒</div>
-        <div class="cert-title">Pre Security</div>
-        <div class="cert-org">TryHackMe</div>
-        <div class="cert-date">🏅 Certificate: THM-2024</div>
-       
+  <div class="cert-card" data-aos="fade-up" style="--cert-color: #06b6d4">
+    <div class="cert-issuer-row">
+      <div class="cert-issuer-icon issuer-opswat"><i class="fas fa-envelope-open-text"></i></div>
+      <div>
+        <div class="cert-issuer-name">OPSWAT Academy</div>
+        <div class="cert-id">ID: ESA-2024</div>
       </div>
     </div>
-
-    <div class="note">
-      <p>Each certificate reflects my journey of continuous learning and passion for technology — 
-      from mastering cybersecurity and full-stack development to building real-world projects that 
-      blend creativity and problem-solving. Learning never stops, and neither do I 🚀</p>
+    <div class="cert-title">Email Security Associate (ESA)</div>
+    <div class="cert-desc">Covers advanced email threat landscape, phishing techniques, secure email gateways, anti-spam mechanisms, and enterprise email security best practices.</div>
+    <div class="cert-meta">
+      <span class="cert-year"><i class="far fa-calendar"></i> 2024</span>
+      <span class="cert-badge badge-verified"><i class="fas fa-check-circle"></i> Verified</span>
     </div>
-  </section>
+  </div>
 
-  <!-- ====== FOOTER ====== -->
-  <footer>
-    <p>© 2025 Abhijeet Yadav | 
-      <a href="https://github.com/AbhijeetYadav09" target="_blank">GitHub</a> | 
+  <div class="cert-card" data-aos="fade-up" data-aos-delay="60" style="--cert-color: #8b5cf6">
+    <div class="cert-issuer-row">
+      <div class="cert-issuer-icon issuer-bitten"><i class="fas fa-user-secret"></i></div>
+      <div>
+        <div class="cert-issuer-name">Bitten Tech</div>
+        <div class="cert-id">ID: EHCS-2024</div>
+      </div>
+    </div>
+    <div class="cert-title">Ethical Hacking &amp; Cyber Security</div>
+    <div class="cert-desc">Practical training in penetration testing, vulnerability assessment, network scanning, social engineering, and defensive security strategies for modern systems.</div>
+    <div class="cert-meta">
+      <span class="cert-year"><i class="far fa-calendar"></i> 2024</span>
+      <span class="cert-badge badge-verified"><i class="fas fa-check-circle"></i> Verified</span>
+    </div>
+  </div>
+
+  <div class="cert-card" data-aos="fade-up" data-aos-delay="120" style="--cert-color: #06b6d4">
+    <div class="cert-issuer-row">
+      <div class="cert-issuer-icon issuer-opswat"><i class="fas fa-industry"></i></div>
+      <div>
+        <div class="cert-issuer-name">OPSWAT Academy</div>
+        <div class="cert-id">ID: ICIP-2024</div>
+      </div>
+    </div>
+    <div class="cert-title">Introduction to Critical Infrastructure Protection (ICIP)</div>
+    <div class="cert-desc">Understanding industrial control systems, OT/IT security convergence, SCADA security, and protecting critical national infrastructure from cyber threats.</div>
+    <div class="cert-meta">
+      <span class="cert-year"><i class="far fa-calendar"></i> 2024</span>
+      <span class="cert-badge badge-verified"><i class="fas fa-check-circle"></i> Verified</span>
+    </div>
+  </div>
+
+  <div class="cert-card" data-aos="fade-up" style="--cert-color: #f87171">
+    <div class="cert-issuer-row">
+      <div class="cert-issuer-icon issuer-up"><i class="fas fa-shield-alt"></i></div>
+      <div>
+        <div class="cert-issuer-name">Uttar Pradesh Police</div>
+        <div class="cert-id">ID: CSA-2024</div>
+      </div>
+    </div>
+    <div class="cert-title">CyberSecurity Awareness</div>
+    <div class="cert-desc">Official cybersecurity awareness certification from UP Police covering digital safety, cybercrime prevention, online fraud detection, and citizen-level cyber hygiene.</div>
+    <div class="cert-meta">
+      <span class="cert-year"><i class="far fa-calendar"></i> 2024</span>
+      <span class="cert-badge badge-verified"><i class="fas fa-check-circle"></i> Verified</span>
+    </div>
+  </div>
+
+  <div class="cert-card" data-aos="fade-up" data-aos-delay="60" style="--cert-color: #06b6d4">
+    <div class="cert-issuer-row">
+      <div class="cert-issuer-icon issuer-opswat"><i class="fas fa-lock"></i></div>
+      <div>
+        <div class="cert-issuer-name">OPSWAT Academy</div>
+        <div class="cert-id">ID: OCFA-2024</div>
+      </div>
+    </div>
+    <div class="cert-title">Cybersecurity Fundamentals Associate (OCFA)</div>
+    <div class="cert-desc">Core cybersecurity concepts including CIA triad, encryption fundamentals, threat modeling, identity management, incident response, and compliance frameworks.</div>
+    <div class="cert-meta">
+      <span class="cert-year"><i class="far fa-calendar"></i> 2024</span>
+      <span class="cert-badge badge-verified"><i class="fas fa-check-circle"></i> Verified</span>
+    </div>
+  </div>
+
+  <div class="cert-card" data-aos="fade-up" data-aos-delay="120" style="--cert-color: #06b6d4">
+    <div class="cert-issuer-row">
+      <div class="cert-issuer-icon issuer-opswat"><i class="fas fa-network-wired"></i></div>
+      <div>
+        <div class="cert-issuer-name">OPSWAT Academy</div>
+        <div class="cert-id">ID: ONSA-2024</div>
+      </div>
+    </div>
+    <div class="cert-title">Network Security Associate (ONSA)</div>
+    <div class="cert-desc">Deep dive into network architecture, firewall configuration, intrusion detection/prevention systems, VPN technology, and enterprise network defense strategies.</div>
+    <div class="cert-meta">
+      <span class="cert-year"><i class="far fa-calendar"></i> 2024</span>
+      <span class="cert-badge badge-verified"><i class="fas fa-check-circle"></i> Verified</span>
+    </div>
+  </div>
+
+  <div class="cert-card" data-aos="fade-up" style="--cert-color: #8b5cf6">
+    <div class="cert-issuer-row">
+      <div class="cert-issuer-icon issuer-softpro"><i class="fab fa-python"></i></div>
+      <div>
+        <div class="cert-issuer-name">Softpro India Pvt. Ltd.</div>
+        <div class="cert-id">ID: PY-2024</div>
+      </div>
+    </div>
+    <div class="cert-title">Python Programming</div>
+    <div class="cert-desc">Comprehensive Python training covering core syntax, OOP, file I/O, web scraping, Flask framework, and data handling — applied in building the Folk Tech Aware platform.</div>
+    <div class="cert-meta">
+      <span class="cert-year"><i class="far fa-calendar"></i> 2024</span>
+      <span class="cert-badge badge-verified"><i class="fas fa-check-circle"></i> Verified</span>
+    </div>
+  </div>
+
+  <div class="cert-card" data-aos="fade-up" data-aos-delay="60" style="--cert-color: #fbbf24">
+    <div class="cert-issuer-row">
+      <div class="cert-issuer-icon issuer-udemy"><i class="fas fa-laptop-code"></i></div>
+      <div>
+        <div class="cert-issuer-name">Udemy</div>
+        <div class="cert-id">ID: WEB-2024</div>
+      </div>
+    </div>
+    <div class="cert-title">Complete Web Development Course</div>
+    <div class="cert-desc">Full-stack web development bootcamp covering HTML5, CSS3, JavaScript, React, Node.js, Express, MongoDB, and modern deployment practices for building production-ready apps.</div>
+    <div class="cert-meta">
+      <span class="cert-year"><i class="far fa-calendar"></i> 2024</span>
+      <span class="cert-badge badge-verified"><i class="fas fa-check-circle"></i> Verified</span>
+    </div>
+  </div>
+
+  <div class="cert-card" data-aos="fade-up" data-aos-delay="120" style="--cert-color: #4ade80">
+    <div class="cert-issuer-row">
+      <div class="cert-issuer-icon issuer-tryhack"><i class="fas fa-terminal"></i></div>
+      <div>
+        <div class="cert-issuer-name">TryHackMe</div>
+        <div class="cert-id">ID: THM-2024</div>
+      </div>
+    </div>
+    <div class="cert-title">Pre Security Learning Path</div>
+    <div class="cert-desc">Hands-on practical cybersecurity training — networking fundamentals, Linux basics, web fundamentals, and foundational security concepts through interactive CTF-style challenges.</div>
+    <div class="cert-meta">
+      <span class="cert-year"><i class="far fa-calendar"></i> 2024</span>
+      <span class="cert-badge badge-verified"><i class="fas fa-check-circle"></i> Verified</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ====== NOTE ====== -->
+<div class="cert-note">
+  <div class="note-box" data-aos="zoom-in">
+    <h3>Commitment to Continuous Learning</h3>
+    <p>Each certification represents my drive to go beyond the classroom. From network security to full-stack development — I invest in structured, verified learning that makes me a more complete engineer. And I'm not done yet.</p>
+  </div>
+</div>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="footer-inner">
+    <p class="footer-copy">© 2025 Abhijeet Yadav · Built with passion &amp; precision</p>
+    <div class="footer-links">
+      <a href="https://github.com/AbhijeetYadav09" target="_blank">GitHub</a>
       <a href="https://www.linkedin.com/in/abhijeet-yadav-729333291/" target="_blank">LinkedIn</a>
-    </p>
-  </footer>
+      <a href="mailto:erabhijeetyadav09@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
 
-  <!-- AOS Animation Library -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 650, easing: 'ease-out-cubic', once: true, offset: 80 });
 
- <script>
-  // Initialize AOS
-  AOS.init({
-    duration: 600,
-    easing: 'ease-in-out',
-    once: true,
-    offset: 100
-  });
-
-  // Mobile Menu Toggle
-  const menu = document.getElementById("mobile-menu");
-  const navLinks = document.querySelector(".nav-links");
-
-  menu.addEventListener("click", () => {
-    menu.classList.toggle("active");
-    navLinks.classList.toggle("active");
-  });
-
-  // Navbar background change on scroll
-  window.addEventListener('scroll', function() {
-    const header = document.querySelector('header');
-    if (window.scrollY > 100) {
-      header.style.background = 'rgba(11, 29, 58, 0.95)';
-      header.style.backdropFilter = 'blur(10px)';
-    } else {
-      header.style.background = '#0b1d3a';
-      header.style.backdropFilter = 'none';
-    }
+  const toggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    toggle.classList.toggle('active');
+    navLinks.classList.toggle('open');
   });
 </script>
-
 </body>
 </html>

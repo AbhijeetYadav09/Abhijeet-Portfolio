@@ -3,570 +3,558 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects | Abhijeet Yadav</title>
-  <!-- AOS Animation Library -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <title>Projects — Abhijeet Yadav</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
-    /* ====== GLOBAL ====== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background-color: #0a192f;
-      color: #e0e6ed;
-      line-height: 1.6;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* ====== HEADER ====== */
-    header {
-      background-color: #0b1d3a;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-    }
-
-    .navbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 25px;
+    /* ====== PAGE HEADER ====== */
+    .proj-header {
+      padding: 100px 24px 64px;
       max-width: 1200px;
-      margin: auto;
-      flex-wrap: wrap;
+      margin: 0 auto;
+      position: relative;
     }
 
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #00b4d8;
+    .proj-header::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 500px; height: 400px;
+      background: radial-gradient(ellipse, rgba(139,92,246,0.07) 0%, transparent 60%);
+      pointer-events: none;
     }
 
-    .nav-links {
-      list-style: none;
+    /* ====== FILTER TABS ====== */
+    .filter-row {
       display: flex;
-      gap: 1.5rem;
-    }
-
-    .nav-links a {
-      color: #f1f1f1;
-      font-weight: 500;
-      transition: 0.3s;
-    }
-
-    .nav-links a:hover,
-    .nav-links .active {
-      color: #ffd60a;
-    }
-
-    #theme-toggle {
-      background: #00b4d8;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      padding: 8px 10px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-
-    #theme-toggle:hover {
-      transform: rotate(15deg);
-    }
-
-    /* ====== PROJECTS SECTION ====== */
-    .projects {
-      width: 100%;
-      background: linear-gradient(135deg, #001d3d, #003566);
-      padding: 100px 20px;
-      text-align: center;
-      animation: fadeIn 1s ease;
-    }
-
-    .projects h2 {
-      color: #ffd60a;
-      font-size: 2.3rem;
+      gap: 8px;
+      flex-wrap: wrap;
       margin-bottom: 40px;
     }
 
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      max-width: 1100px;
-      margin: auto;
+    .filter-btn {
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
     }
 
-    .project-card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 15px;
-      padding: 30px 25px;
-      text-align: left;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--accent-glow);
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    /* ====== PROJECT GRID ====== */
+    .proj-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    /* Case Study Card */
+    .proj-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .proj-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-glow);
+      transform: translateY(-5px);
+    }
+
+    .proj-thumb {
+      height: 200px;
       position: relative;
       overflow: hidden;
-      backdrop-filter: blur(10px);
-      cursor: pointer;
+      flex-shrink: 0;
     }
 
-    .project-card::before {
-      content: '';
+    .proj-thumb-bg {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(0, 180, 216, 0.1), rgba(255, 214, 10, 0.1));
-      opacity: 0;
-      transition: opacity 0.3s;
-      z-index: 0;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      transition: transform 0.5s ease;
     }
 
-    .project-card:hover::before {
-      opacity: 1;
+    .proj-card:hover .proj-thumb-bg {
+      transform: scale(1.05);
     }
 
-    .project-card:hover {
-      transform: translateY(-12px) scale(1.02);
-      box-shadow: 0 20px 50px rgba(0, 180, 216, 0.4);
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(0, 180, 216, 0.5);
+    .bg-1 { background: linear-gradient(135deg, #1a0a3a 0%, #2d1060 50%, #0a0a2a 100%); }
+    .bg-2 { background: linear-gradient(135deg, #0a2040 0%, #0d3a6e 50%, #0a1020 100%); }
+    .bg-3 { background: linear-gradient(135deg, #1a2a0a 0%, #2a4a10 50%, #0a1505 100%); }
+    .bg-4 { background: linear-gradient(135deg, #2a1a0a 0%, #4a3010 50%, #1a0a05 100%); }
+    .bg-5 { background: linear-gradient(135deg, #0a1a2a 0%, #1a3048 50%, #05100a 100%); }
+    .bg-6 { background: linear-gradient(135deg, #1a0a2a 0%, #2d1050 50%, #0d0520 100%); }
+
+    .proj-category-badge {
+      position: absolute;
+      top: 14px; left: 14px;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      backdrop-filter: blur(10px);
     }
 
-    .project-card h3 {
-      color: #00b4d8;
-      margin-bottom: 10px;
-      font-size: 1.4rem;
-      position: relative;
-      z-index: 1;
-      transition: color 0.3s;
+    .cat-fullstack { background: rgba(139,92,246,0.2); color: #c4b5fd; border: 1px solid rgba(139,92,246,0.3); }
+    .cat-security  { background: rgba(74,222,128,0.15); color: #86efac; border: 1px solid rgba(74,222,128,0.3); }
+    .cat-frontend  { background: rgba(6,182,212,0.15);  color: #67e8f9; border: 1px solid rgba(6,182,212,0.3); }
+    .cat-backend   { background: rgba(251,191,36,0.15); color: #fde68a; border: 1px solid rgba(251,191,36,0.3); }
+
+    .proj-body {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
 
-    .project-card:hover h3 {
-      color: #ffd60a;
+    .proj-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
     }
 
-    .project-card p {
-      color: #dbe4ee;
-      font-size: 0.98rem;
-      margin-bottom: 20px;
-      position: relative;
-      z-index: 1;
+    .proj-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 16px;
+      flex: 1;
     }
 
-    .tech-stack {
+    .proj-impact {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .impact-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--green);
+      background: rgba(74,222,128,0.07);
+      border: 1px solid rgba(74,222,128,0.15);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .impact-item i { font-size: 0.7rem; }
+
+    .proj-tags {
       display: flex;
       flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .proj-tag {
+      font-size: 0.73rem;
+      padding: 4px 11px;
+      border-radius: 6px;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .proj-footer {
+      display: flex;
       gap: 10px;
-      position: relative;
-      z-index: 1;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
     }
 
-    .tech-tag {
-      background: rgba(0, 180, 216, 0.15);
-      border: 1px solid rgba(0, 180, 216, 0.3);
-      color: #00b4d8;
-      font-size: 0.85rem;
-      padding: 6px 12px;
-      border-radius: 20px;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
+    .proj-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      padding: 7px 14px;
+      border-radius: 7px;
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      transition: var(--transition);
     }
 
-    .tech-tag::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(0, 180, 216, 0.4);
-      transform: translate(-50%, -50%);
-      transition: width 0.3s, height 0.3s;
+    .proj-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: var(--accent-glow);
     }
 
-    .tech-tag:hover::before {
-      width: 100%;
-      height: 100%;
+    .proj-link-primary {
+      color: var(--text) !important;
+      background: rgba(139,92,246,0.15) !important;
+      border-color: rgba(139,92,246,0.3) !important;
     }
 
-    .tech-tag:hover {
-      background: #00b4d8;
-      color: #001d3d;
-      box-shadow: 0 0 15px rgba(0, 180, 216, 0.5);
-      transform: translateY(-2px) scale(1.05);
+    .proj-link-primary:hover {
+      background: var(--accent) !important;
+      color: #fff !important;
     }
 
-    /* ====== FEATURED BANNER ====== */
-    .featured {
-      background: #0b2545;
-      padding: 80px 20px;
+    /* ====== CTA STRIP ====== */
+    .projects-cta {
+      padding: 0 24px 80px;
+      max-width: 1200px;
+      margin: 0 auto;
       text-align: center;
     }
 
-    .featured h3 {
-      color: #ffd60a;
-      font-size: 2rem;
-      margin-bottom: 15px;
+    .projects-cta h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
     }
 
-    .featured p {
-      color: #dbe4ee;
-      max-width: 800px;
-      margin: auto;
-      font-size: 1.05rem;
-    }
-
-    /* ====== FOOTER ====== */
-    footer {
-      background: #000814;
-      color: #bbb;
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-    }
-
-    footer a {
-      color: #00b4d8;
-    }
-    .hire-btn {
-  background: linear-gradient(90deg, #00b4d8, #0096c7);
-  color: white;
-  border: none;
-  border-radius: 30px;
-  padding: 10px 22px;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: 0.3s;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-.hire-btn:hover {
-  background: linear-gradient(90deg, #ffd60a, #ffc300);
-  color: #001d3d;
-  transform: scale(1.05);
-}
-
-
-    footer a:hover {
-      color: #ffd60a;
-    }
-
-    /* ====== ANIMATION ====== */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .projects-cta p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 20px;
     }
 
     /* ====== RESPONSIVE ====== */
-    @media (max-width: 768px) {
-      .projects h2 {
-        font-size: 1.9rem;
-      }
-
-      .project-card {
-        padding: 25px 20px;
-      }
+    @media (max-width: 900px) {
+      .proj-grid { grid-template-columns: 1fr; }
     }
-    /* ===== NAVBAR BASE ===== */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 25px;
-  max-width: 1200px;
-  margin: auto;
-  flex-wrap: wrap;
-  position: relative;
-}
 
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1.5rem;
-}
-
-.nav-links li a {
-  color: #f1f1f1;
-  text-decoration: none;
-  font-weight: 500;
-  transition: 0.3s;
-}
-
-.nav-links li a:hover,
-.nav-links .active {
-  color: #ffd60a;
-}
-
-/* ===== HAMBURGER ===== */
-.menu-toggle {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  position: relative;
-  z-index: 1001;
-}
-
-.bar {
-  height: 3px;
-  width: 25px;
-  background: #00b4d8;
-  margin: 4px 0;
-  border-radius: 3px;
-  transition: all 0.3s ease;
-}
-
-/* ===== MOBILE MENU ACTIVE ===== */
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: flex;
-  }
-
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    background: rgba(0, 29, 61, 0.97);
-    text-align: center;
-    padding: 20px 0;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-  }
-
-  .nav-links.active {
-    display: flex;
-    animation: slideDown 0.3s ease forwards;
-  }
-
-  @keyframes slideDown {
-    from {
-      transform: translateY(-15px);
-      opacity: 0;
+    @media (max-width: 640px) {
+      .proj-header { padding: 80px 20px 48px; }
+      .proj-grid { padding: 0 20px 60px; }
     }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-
-  .hire-btn {
-    display: none; /* hide hire button in mobile menu header */
-  }
-}
-
   </style>
 </head>
-
 <body>
-  <!-- ====== HEADER ====== -->
-  <header>
+
+<!-- ====== NAV ====== -->
+<header>
   <nav class="navbar">
-    <h1 class="logo">Abhijeet Yadav</h1>
-
-    <!-- Hamburger Icon -->
-    <div class="menu-toggle" id="mobile-menu">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </div>
-
-    <!-- Navigation Links -->
-    <ul class="nav-links">
+    <a href="index.html" class="logo">
+      <span class="logo-dot"></span>
+      Abhijeet Yadav
+    </a>
+    <ul class="nav-links" id="navLinks">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
-      <li><a href="projects.html">Projects</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
       <li><a href="certificates.html">Certificates</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="contact.html" class="nav-cta">Hire Me</a></li>
     </ul>
-
-    <!-- Hire Me Button -->
-    <button class="hire-btn" onclick="location.href='contact.html'">Hire Me</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
   </nav>
 </header>
 
+<!-- ====== HEADER ====== -->
+<div class="proj-header" data-aos="fade-up">
+  <p class="section-label">Portfolio</p>
+  <h1 class="page-title">Projects that ship,<br><span class="gradient-text">features that matter</span></h1>
+  <p class="page-desc">A curated collection of full-stack projects — each built from scratch with real-world challenges, technical depth, and a focus on user experience.</p>
 
-  <!-- ====== PROJECTS SECTION ====== -->
-  <section class="projects">
-    <h2>My Projects</h2>
-
-    <div class="project-grid">
-      <div class="project-card" data-aos="fade-up">
-        <h3>Online Job Portal</h3>
-        <p>A responsive platform that connects job seekers and employers — allowing users to search, apply, and post jobs efficiently.</p>
-        <div class="tech-stack">
-          <span class="tech-tag">HTML</span>
-          <span class="tech-tag">CSS</span>
-          <span class="tech-tag">JavaScript</span>
-        
-          <span class="tech-tag">MySQL</span>
-        </div>
-      </div>
-
-      <div class="project-card" data-aos="fade-up" data-aos-delay="100">
-        <h3>Folk Tech Aware</h3>
-        <p>A cybersecurity awareness platform educating users about safe digital practices through articles, simulations, and quizzes.</p>
-        <div class="tech-stack">
-          <span class="tech-tag">Python</span>
-          <span class="tech-tag">Flask</span>
-          <span class="tech-tag">Bootstrap</span>
-          <span class="tech-tag">SQLite</span>
-        </div>
-      </div>
-
-     <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-  <h3>Sip-Roastery</h3>
-  <p>A responsive coffee shop website built with HTML, CSS, and JavaScript — featuring an interactive menu, order system, and dynamic user-owner profiles.</p>
-  <div class="tech-stack">
-    <span class="tech-tag">HTML</span>
-    <span class="tech-tag">CSS</span>
-    <span class="tech-tag">JavaScript</span>
-    <span class="tech-tag">MongoDB</span>
+  <div class="filter-row" style="margin-top:28px;">
+    <button class="filter-btn active" data-filter="all">All Projects</button>
+    <button class="filter-btn" data-filter="fullstack">Full Stack</button>
+    <button class="filter-btn" data-filter="security">Security</button>
+    <button class="filter-btn" data-filter="frontend">Frontend</button>
   </div>
 </div>
 
+<!-- ====== PROJECTS GRID ====== -->
+<div class="proj-grid">
 
-      <div class="project-card" data-aos="fade-up" data-aos-delay="300">
-        <h3>TradeState</h3>
-        <p>A stock trading simulation web app where users can track prices, make virtual trades, and analyze performance with live data.</p>
-        <div class="tech-stack">
-            <span class="tech-tag">HTML</span>
-          <span class="tech-tag">CSS</span>
-          
-          <span class="tech-tag">React</span>
-          <span class="tech-tag">Node.js</span>
-          
-          <span class="tech-tag">MongoDB</span>
-         
-        </div>
+  <!-- 1: Job Portal -->
+  <div class="proj-card" data-aos="fade-up" data-category="fullstack">
+    <div class="proj-thumb">
+      <div class="proj-thumb-bg bg-1">
+        <i class="fas fa-briefcase" style="color:rgba(139,92,246,0.7)"></i>
       </div>
-
-      <div class="project-card" data-aos="fade-up" data-aos-delay="400">
-        <h3>CollegeFest</h3>
-        <p>A dynamic college event management site with registration, live updates, and interactive photo galleries for tech fests.</p>
-        <div class="tech-stack">
-          <span class="tech-tag">HTML</span>
-          <span class="tech-tag">Tailwind CSS</span>
-          <span class="tech-tag">JavaScript</span>
-          <span class="tech-tag">Firebase</span>
-        </div>
+      <span class="proj-category-badge cat-fullstack">Full Stack</span>
+    </div>
+    <div class="proj-body">
+      <h3 class="proj-title">Online Job Portal</h3>
+      <p class="proj-desc">
+        A full-stack recruitment platform enabling job seekers to search and apply for positions while employers post openings, review applications, and manage candidates — all through a role-based access system.
+      </p>
+      <div class="proj-impact">
+        <div class="impact-item"><i class="fas fa-check-circle"></i> Role-based access control</div>
+        <div class="impact-item"><i class="fas fa-check-circle"></i> Dynamic job search & filter</div>
+        <div class="impact-item"><i class="fas fa-check-circle"></i> Responsive design</div>
       </div>
-
-      <div class="project-card" data-aos="fade-up" data-aos-delay="500">
-        <h3>Portfolio Website</h3>
-        <p>This personal portfolio website — designed to showcase my work, skills, and creativity in a modern, interactive layout.</p>
-        <div class="tech-stack">
-          <span class="tech-tag">HTML</span>
-          <span class="tech-tag">CSS</span>
-          <span class="tech-tag">JavaScript</span>
-        </div>
+      <div class="proj-tags">
+        <span class="proj-tag">HTML5</span>
+        <span class="proj-tag">CSS3</span>
+        <span class="proj-tag">JavaScript</span>
+        <span class="proj-tag">MySQL</span>
+        <span class="proj-tag">PHP</span>
+      </div>
+      <div class="proj-footer">
+        <a href="https://github.com/AbhijeetYadav09" target="_blank" class="proj-link">
+          <i class="fab fa-github"></i> Source Code
+        </a>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ====== FEATURED BANNER ====== -->
-  <section class="featured">
-    <h3>Building Ideas into Reality 🚀</h3>
-    <p>Each project I create reflects my passion for innovation and my commitment to developing scalable, secure, and user-focused software experiences.</p>
-  </section>
+  <!-- 2: Folk Tech Aware -->
+  <div class="proj-card" data-aos="fade-up" data-aos-delay="80" data-category="security">
+    <div class="proj-thumb">
+      <div class="proj-thumb-bg bg-2">
+        <i class="fas fa-shield-alt" style="color:rgba(74,222,128,0.7)"></i>
+      </div>
+      <span class="proj-category-badge cat-security">Security</span>
+    </div>
+    <div class="proj-body">
+      <h3 class="proj-title">Folk Tech Aware</h3>
+      <p class="proj-desc">
+        A cybersecurity awareness web platform educating rural and non-technical users about safe digital practices. Features interactive modules, phishing simulations, awareness quizzes, and progress tracking — built with Python Flask.
+      </p>
+      <div class="proj-impact">
+        <div class="impact-item"><i class="fas fa-check-circle"></i> Interactive quiz engine</div>
+        <div class="impact-item"><i class="fas fa-check-circle"></i> Phishing simulations</div>
+        <div class="impact-item"><i class="fas fa-check-circle"></i> User progress tracking</div>
+      </div>
+      <div class="proj-tags">
+        <span class="proj-tag">Python</span>
+        <span class="proj-tag">Flask</span>
+        <span class="proj-tag">Bootstrap</span>
+        <span class="proj-tag">SQLite</span>
+        <span class="proj-tag">Jinja2</span>
+      </div>
+      <div class="proj-footer">
+        <a href="https://github.com/AbhijeetYadav09" target="_blank" class="proj-link">
+          <i class="fab fa-github"></i> Source Code
+        </a>
+      </div>
+    </div>
+  </div>
 
-  <!-- ====== FOOTER ====== -->
-  <footer>
-    <p>© 2025 Abhijeet Yadav | 
-      <a href="https://github.com/AbhijeetYadav09" target="_blank">GitHub</a> | 
+  <!-- 3: Sip-Roastery -->
+  <div class="proj-card" data-aos="fade-up" data-category="fullstack">
+    <div class="proj-thumb">
+      <div class="proj-thumb-bg bg-3">
+        <i class="fas fa-coffee" style="color:rgba(251,191,36,0.7)"></i>
+      </div>
+      <span class="proj-category-badge cat-frontend">Frontend</span>
+    </div>
+    <div class="proj-body">
+      <h3 class="proj-title">Sip-Roastery</h3>
+      <p class="proj-desc">
+        A responsive coffee shop website featuring an interactive menu, real-time order system with cart management, and separate user/owner dashboards. Built with MongoDB for order persistence and a rich, animated UI.
+      </p>
+      <div class="proj-impact">
+        <div class="impact-item"><i class="fas fa-check-circle"></i> Real-time order system</div>
+        <div class="impact-item"><i class="fas fa-check-circle"></i> Dual user/owner dashboard</div>
+        <div class="impact-item"><i class="fas fa-check-circle"></i> Interactive menu with cart</div>
+      </div>
+      <div class="proj-tags">
+        <span class="proj-tag">HTML5</span>
+        <span class="proj-tag">CSS3</span>
+        <span class="proj-tag">JavaScript</span>
+        <span class="proj-tag">MongoDB</span>
+        <span class="proj-tag">Node.js</span>
+      </div>
+      <div class="proj-footer">
+        <a href="https://github.com/AbhijeetYadav09" target="_blank" class="proj-link">
+          <i class="fab fa-github"></i> Source Code
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4: TradeState -->
+  <div class="proj-card" data-aos="fade-up" data-aos-delay="80" data-category="fullstack">
+    <div class="proj-thumb">
+      <div class="proj-thumb-bg bg-4">
+        <i class="fas fa-chart-line" style="color:rgba(6,182,212,0.7)"></i>
+      </div>
+      <span class="proj-category-badge cat-fullstack">Full Stack</span>
+    </div>
+    <div class="proj-body">
+      <h3 class="proj-title">TradeState</h3>
+      <p class="proj-desc">
+        A stock trading simulation platform where users practice investing with virtual funds. Features real-time price tracking, portfolio analytics, trade history, profit/loss calculations, and interactive performance charts.
+      </p>
+      <div class="proj-impact">
+        <div class="impact-item"><i class="fas fa-check-circle"></i> Live price simulation</div>
+        <div class="impact-item"><i class="fas fa-check-circle"></i> Portfolio P&amp;L analytics</div>
+        <div class="impact-item"><i class="fas fa-check-circle"></i> Interactive charts</div>
+      </div>
+      <div class="proj-tags">
+        <span class="proj-tag">React</span>
+        <span class="proj-tag">Node.js</span>
+        <span class="proj-tag">MongoDB</span>
+        <span class="proj-tag">Express</span>
+        <span class="proj-tag">Chart.js</span>
+      </div>
+      <div class="proj-footer">
+        <a href="https://github.com/AbhijeetYadav09" target="_blank" class="proj-link">
+          <i class="fab fa-github"></i> Source Code
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5: CollegeFest -->
+  <div class="proj-card" data-aos="fade-up" data-category="frontend">
+    <div class="proj-thumb">
+      <div class="proj-thumb-bg bg-5">
+        <i class="fas fa-calendar-star" style="color:rgba(139,92,246,0.65)"></i>
+      </div>
+      <span class="proj-category-badge cat-frontend">Frontend</span>
+    </div>
+    <div class="proj-body">
+      <h3 class="proj-title">CollegeFest</h3>
+      <p class="proj-desc">
+        A dynamic college tech-fest management website featuring online event registration, live schedule updates, countdown timers, interactive photo galleries, and real-time seat availability tracking via Firebase.
+      </p>
+      <div class="proj-impact">
+        <div class="impact-item"><i class="fas fa-check-circle"></i> Live event registration</div>
+        <div class="impact-item"><i class="fas fa-check-circle"></i> Firebase real-time updates</div>
+        <div class="impact-item"><i class="fas fa-check-circle"></i> Countdown & schedule</div>
+      </div>
+      <div class="proj-tags">
+        <span class="proj-tag">HTML5</span>
+        <span class="proj-tag">Tailwind CSS</span>
+        <span class="proj-tag">JavaScript</span>
+        <span class="proj-tag">Firebase</span>
+      </div>
+      <div class="proj-footer">
+        <a href="https://github.com/AbhijeetYadav09" target="_blank" class="proj-link">
+          <i class="fab fa-github"></i> Source Code
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6: Portfolio -->
+  <div class="proj-card" data-aos="fade-up" data-aos-delay="80" data-category="frontend">
+    <div class="proj-thumb">
+      <div class="proj-thumb-bg bg-6">
+        <i class="fas fa-laptop-code" style="color:rgba(139,92,246,0.7)"></i>
+      </div>
+      <span class="proj-category-badge cat-frontend">Frontend</span>
+    </div>
+    <div class="proj-body">
+      <h3 class="proj-title">Portfolio Website</h3>
+      <p class="proj-desc">
+        This very portfolio — a product-style developer website built with vanilla HTML/CSS/JS. Features smooth AOS animations, a fully responsive design system, a working contact form via EmailJS, and GitHub stats integration.
+      </p>
+      <div class="proj-impact">
+        <div class="impact-item"><i class="fas fa-check-circle"></i> Custom design system</div>
+        <div class="impact-item"><i class="fas fa-check-circle"></i> EmailJS contact form</div>
+        <div class="impact-item"><i class="fas fa-check-circle"></i> GitHub stats widget</div>
+      </div>
+      <div class="proj-tags">
+        <span class="proj-tag">HTML5</span>
+        <span class="proj-tag">CSS3</span>
+        <span class="proj-tag">JavaScript</span>
+        <span class="proj-tag">EmailJS</span>
+        <span class="proj-tag">AOS</span>
+      </div>
+      <div class="proj-footer">
+        <a href="https://github.com/abhijeetyadav09/abhijeet-portfolio" target="_blank" class="proj-link proj-link-primary">
+          <i class="fab fa-github"></i> View Source
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ====== CTA ====== -->
+<div class="projects-cta" data-aos="fade-up">
+  <h3>Want to collaborate?</h3>
+  <p>I'm always excited to take on interesting projects and challenges. Let's talk.</p>
+  <a href="contact.html" class="btn btn-primary">
+    <i class="fas fa-paper-plane"></i> Start a Conversation
+  </a>
+</div>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="footer-inner">
+    <p class="footer-copy">© 2025 Abhijeet Yadav · Built with passion &amp; precision</p>
+    <div class="footer-links">
+      <a href="https://github.com/AbhijeetYadav09" target="_blank">GitHub</a>
       <a href="https://www.linkedin.com/in/abhijeet-yadav-729333291/" target="_blank">LinkedIn</a>
-    </p>
-  </footer>
+      <a href="mailto:erabhijeetyadav09@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
 
-  <!-- AOS Animation Library -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({ duration: 650, easing: 'ease-out-cubic', once: true, offset: 80 });
 
-  <script>
-  // Initialize AOS
-  AOS.init({
-    duration: 800,
-    easing: 'ease-in-out',
-    once: true,
-    offset: 100
+  // Mobile nav
+  const toggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    toggle.classList.toggle('active');
+    navLinks.classList.toggle('open');
   });
 
-  // Mobile Menu Toggle
-  const menu = document.getElementById("mobile-menu");
-  const navLinks = document.querySelector(".nav-links");
+  // Filter
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projCards = document.querySelectorAll('.proj-card');
 
-  menu.addEventListener("click", () => {
-    menu.classList.toggle("active");
-    navLinks.classList.toggle("active");
-  });
-
-  // Add parallax effect to project cards
-  document.querySelectorAll('.project-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
-      
-      const rotateX = (y - centerY) / 20;
-      const rotateY = (centerX - x) / 20;
-      
-      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-12px) scale(1.02)`;
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      projCards.forEach(card => {
+        const match = filter === 'all' || card.dataset.category === filter;
+        card.style.display = match ? '' : 'none';
+      });
     });
-    
+  });
+
+  // 3D tilt on cards
+  projCards.forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `perspective(800px) rotateY(${x * 6}deg) rotateX(${-y * 4}deg) translateY(-5px)`;
+    });
     card.addEventListener('mouseleave', () => {
-      card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
+      card.style.transform = '';
     });
-  });
-
-  // Smooth scroll for navigation
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    });
-  });
-
-  // Navbar background change on scroll
-  window.addEventListener('scroll', function() {
-    const header = document.querySelector('header');
-    if (window.scrollY > 100) {
-      header.style.background = 'rgba(11, 29, 58, 0.95)';
-      header.style.backdropFilter = 'blur(10px)';
-    } else {
-      header.style.background = '#0b1d3a';
-      header.style.backdropFilter = 'none';
-    }
   });
 </script>
-
 </body>
 </html>
