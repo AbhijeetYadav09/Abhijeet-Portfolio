@@ -107,14 +107,22 @@
       background: linear-gradient(90deg, transparent, var(--accent), transparent);
     }
 
-    .profile-avatar {
+    .profile-avatar-initials {
       width: 120px; height: 120px;
       border-radius: 50%;
+      background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.02em;
       border: 3px solid rgba(139,92,246,0.4);
-      object-fit: cover;
+      box-shadow: 0 0 40px rgba(139,92,246,0.3);
       margin: 0 auto 16px;
-      display: block;
-      box-shadow: 0 0 30px var(--accent-glow);
+      user-select: none;
     }
 
     .profile-card-name {
@@ -439,7 +447,7 @@
       <p class="section-label">About Me</p>
       <h1 class="about-name">Full Stack Developer<br><span class="gradient-text">&amp; Security Enthusiast</span></h1>
       <p class="about-tagline">
-        I'm <strong>Abhijeet Yadav</strong> — a B.Tech Computer Science graduate who builds end-to-end web applications with a security-first mindset. I bridge the gap between clean user interfaces and robust backend systems, with a deep interest in cybersecurity principles.
+        I'm <strong>Abhijeet Yadav</strong> — a B.Tech Computer Science graduate who builds end-to-end web applications with a security-first mindset. I bridge the gap between clean user interfaces and robust backend systems, with a deep interest in cybersecurity principles. With <strong>2,920+ GitHub contributions</strong> in the last year, I code consistently and ship with purpose.
       </p>
 
       <div class="about-meta">
@@ -472,12 +480,7 @@
     </div>
 
     <div class="profile-card" data-aos="fade-left" data-aos-delay="100">
-      <img
-        src="assets/images/profile.jpg"
-        alt="Abhijeet Yadav"
-        class="profile-avatar"
-        onerror="this.src='https://ui-avatars.com/api/?name=AY&size=200&background=8b5cf6&color=fff&bold=true&font-size=0.45'"
-      />
+      <div class="profile-avatar-initials">AY</div>
       <div class="profile-card-name">Abhijeet Yadav</div>
       <div class="profile-card-title">Full Stack Developer · Cybersecurity</div>
 
@@ -574,18 +577,21 @@
         <span class="skill-chip"><i class="devicon-git-plain colored"></i> Git</span>
         <span class="skill-chip"><i class="devicon-github-original"></i> GitHub</span>
         <span class="skill-chip"><i class="devicon-vscode-plain colored"></i> VS Code</span>
+        <span class="skill-chip"><i class="devicon-azure-plain colored"></i> Azure</span>
         <span class="skill-chip"><i class="fas fa-cube" style="color:#512bd4"></i> Syncfusion</span>
+        <span class="skill-chip"><i class="fab fa-linux" style="color:#fde68a"></i> Linux</span>
       </div>
     </div>
 
     <div class="skill-category" data-aos="fade-up" data-aos-delay="400">
-      <div class="skill-cat-title"><i class="fas fa-brain"></i> Core Skills</div>
+      <div class="skill-cat-title"><i class="fas fa-brain"></i> Core Skills &amp; Languages</div>
       <div class="skill-tags">
+        <span class="skill-chip"><i class="devicon-c-plain colored"></i> C</span>
+        <span class="skill-chip"><i class="devicon-cplusplus-plain colored"></i> C++</span>
         <span class="skill-chip"><i class="fas fa-sitemap" style="color:#8b5cf6"></i> DSA</span>
         <span class="skill-chip"><i class="fas fa-cube" style="color:#06b6d4"></i> OOP</span>
         <span class="skill-chip"><i class="fas fa-project-diagram" style="color:#4ade80"></i> REST APIs</span>
         <span class="skill-chip"><i class="fas fa-mobile-alt" style="color:#fbbf24"></i> Responsive UI</span>
-        <span class="skill-chip"><i class="fas fa-terminal" style="color:#f87171"></i> Linux / CLI</span>
       </div>
     </div>
   </div>
