@@ -493,9 +493,16 @@
       margin-top: 36px;
     }
 
-.github-contrib-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
+    .github-stat-card {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .github-contrib-card {
+      background: #0d1117;
+      border: 1px solid #30363d;
       border-radius: var(--radius-lg);
       padding: 24px 28px;
       overflow: hidden;
@@ -513,7 +520,8 @@
       gap: 8px;
     }
 
-    .github-contrib-label i { color: var(--green); }
+    .github-contrib-label { color: #7d8590; }
+    .github-contrib-label i { color: #39d353; }
 
     .github-contrib-card img {
       width: 100%;
@@ -893,24 +901,38 @@
     <p class="section-sub" data-aos="fade-up" data-aos-delay="100">Consistent commits, public projects, and a growing open source presence.</p>
 
     <div class="github-cards" data-aos="fade-up" data-aos-delay="150">
-      <!-- Contribution heatmap via ghchart (reliable, no auth needed) -->
+
+      <!-- Contribution activity graph — GitHub dark green palette -->
       <div class="github-contrib-card">
         <div class="github-contrib-label">
           <i class="fas fa-circle"></i>
-          2,920+ contributions in the last year
+          2,924+ contributions in the last year
         </div>
         <img
-          src="https://ghchart.rshah.org/4ade80/AbhijeetYadav09"
-          alt="Abhijeet Yadav's GitHub Contribution Chart"
+          src="https://github-readme-activity-graph.vercel.app/graph?username=AbhijeetYadav09&bg_color=0d1117&color=39d353&line=26a641&point=39d353&area=true&area_color=0e4429&hide_border=true&radius=4&custom_title=Contribution+Activity"
+          alt="GitHub Contribution Activity Graph"
           loading="lazy"
-          style="background:#111120; border-radius:8px; padding:12px;"
+          style="border-radius:8px; width:100%;"
+          onerror="this.parentElement.style.display='none'"
         />
         <div class="github-achievements">
           <span class="achievement-pill"><i class="fas fa-trophy"></i> Pull Shark ×3</span>
           <span class="achievement-pill"><i class="fas fa-bolt"></i> YOLO</span>
-          <span class="achievement-pill"><i class="fas fa-code-branch"></i> 2,920+ Contributions</span>
+          <span class="achievement-pill"><i class="fas fa-code-branch"></i> 2,924+ Contributions</span>
         </div>
       </div>
+
+      <!-- GitHub Stats card — silently hides itself if API is down -->
+      <div class="github-stat-card" id="githubStatsCard">
+        <img
+          src="https://github-readme-stats.vercel.app/api?username=AbhijeetYadav09&show_icons=true&bg_color=0d1117&title_color=8b5cf6&icon_color=39d353&text_color=c9d1d9&border_color=30363d&hide_border=false&count_private=true&include_all_commits=true&rank_icon=github"
+          alt="Abhijeet's GitHub Stats"
+          loading="lazy"
+          style="width:100%; height:auto; display:block; border-radius:var(--radius-lg);"
+          onerror="document.getElementById('githubStatsCard').style.display='none'"
+        />
+      </div>
+
     </div>
   </div>
 </section>
