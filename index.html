@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Abhijeet Yadav — Full Stack Developer & Cybersecurity Enthusiast. Building fast, secure, and scalable web applications." />
+  <meta name="description" content="Abhijeet Yadav — Full Stack Developer. Building fast, secure, and scalable web applications." />
   <title>Abhijeet Yadav — Full Stack Developer</title>
   <link rel="stylesheet" href="assets/css/main.css" />
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
@@ -637,6 +637,131 @@
       .github-cards { grid-template-columns: 1fr; }
     }
 
+    /* ====== GITHUB ACHIEVEMENTS ====== */
+    .gh-achievements-section {
+      padding: 0 24px 80px;
+    }
+
+    .gh-achievements-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .gh-badges-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 36px;
+      justify-content: center;
+    }
+
+    .gh-badge-card {
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 16px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      width: 160px;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    .gh-badge-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(139,92,246,0.5), transparent);
+    }
+
+    .gh-badge-card:hover {
+      border-color: rgba(139,92,246,0.5);
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(139,92,246,0.15);
+    }
+
+    .gh-badge-img-wrap {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #161b22;
+      border: 2px solid #30363d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gh-badge-img-wrap img {
+      width: 72px; height: 72px;
+      object-fit: contain;
+    }
+
+    .gh-badge-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #e6edf3;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .gh-badge-tier {
+      font-size: 0.7rem;
+      color: #7d8590;
+      text-align: center;
+    }
+
+    .gh-badge-card.new-badge {
+      border-color: rgba(74,222,128,0.35);
+      animation: badge-glow 2.5s ease-in-out infinite;
+    }
+
+    .gh-badge-card.new-badge::before {
+      background: linear-gradient(90deg, transparent, rgba(74,222,128,0.5), transparent);
+    }
+
+    @keyframes badge-glow {
+      0%, 100% { box-shadow: 0 0 10px rgba(74,222,128,0.1); }
+      50% { box-shadow: 0 0 25px rgba(74,222,128,0.3); }
+    }
+
+    .gh-new-chip {
+      position: absolute;
+      top: 10px; right: 10px;
+      background: rgba(74,222,128,0.15);
+      border: 1px solid rgba(74,222,128,0.4);
+      color: #4ade80;
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .gh-achievements-note {
+      text-align: center;
+      font-size: 0.78rem;
+      color: #7d8590;
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .gh-achievements-note i { color: #39d353; font-size: 0.65rem; }
+
+    @media (max-width: 600px) {
+      .gh-badge-card { width: 130px; padding: 18px 14px; }
+      .gh-badges-grid { gap: 12px; }
+    }
+
     /* ====== CTA ====== */
     .cta-section {
       padding: 0 24px 80px;
@@ -785,13 +910,8 @@
 
     <!-- Right Card -->
     <div class="hero-card" data-aos="fade-left" data-aos-duration="700" data-aos-delay="100">
-      <div class="profile-img-wrap">
-        <div class="avatar-initials">AY</div>
-        <div class="profile-status"></div>
-      </div>
-
-      <div class="hero-card-name">Abhijeet Yadav</div>
-      <div class="hero-card-role">Full Stack Developer · Cybersecurity</div>
+      <div class="hero-card-name" style="font-size:1.45rem; margin-bottom:6px;">Abhijeet Yadav</div>
+      <div class="hero-card-role">Full Stack Developer</div>
 
       <div class="hero-stats">
         <div class="stat-box">
@@ -862,6 +982,79 @@
         <div class="bento-number gradient-text counter" data-target="9">0</div>
         <h3>Certifications</h3>
         <p>OPSWAT Academy, TryHackMe, Udemy, Bitten Tech, and more.</p>
+      </div>
+
+      <!-- Card 6 - SVG illustration spans rows 2+3, col 3 -->
+      <div class="bento-card bento-svg-card" data-aos="fade-up" data-aos-delay="175" style="grid-row: span 2; display:flex; flex-direction:column; align-items:center; justify-content:center; background: linear-gradient(145deg, #0f0a1e 0%, #1a0d35 50%, #0a1020 100%); border-color: rgba(139,92,246,0.25); padding: 28px 20px;">
+        <svg viewBox="0 0 220 280" xmlns="http://www.w3.org/2000/svg" style="width:100%; max-width:200px; flex:1;">
+          <defs>
+            <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#8b5cf6"/>
+              <stop offset="100%" stop-color="#06b6d4"/>
+            </linearGradient>
+            <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#4ade80"/>
+              <stop offset="100%" stop-color="#06b6d4"/>
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <!-- Monitor frame -->
+          <rect x="20" y="30" width="180" height="120" rx="10" ry="10" fill="none" stroke="url(#g1)" stroke-width="2" opacity="0.7"/>
+          <rect x="28" y="38" width="164" height="104" rx="6" ry="6" fill="#0d1117"/>
+          <!-- Code lines -->
+          <rect x="38" y="52" width="60" height="5" rx="2" fill="#8b5cf6" opacity="0.9"/>
+          <rect x="38" y="65" width="100" height="4" rx="2" fill="#4ade80" opacity="0.7"/>
+          <rect x="48" y="77" width="80" height="4" rx="2" fill="#06b6d4" opacity="0.7"/>
+          <rect x="48" y="89" width="60" height="4" rx="2" fill="#8b5cf6" opacity="0.5"/>
+          <rect x="38" y="101" width="90" height="4" rx="2" fill="#4ade80" opacity="0.6"/>
+          <rect x="48" y="113" width="50" height="4" rx="2" fill="#f59e0b" opacity="0.7"/>
+          <rect x="38" y="125" width="70" height="4" rx="2" fill="#06b6d4" opacity="0.5"/>
+          <!-- Cursor blink indicator -->
+          <rect x="111" y="125" width="6" height="4" rx="1" fill="#8b5cf6" opacity="0.9">
+            <animate attributeName="opacity" values="0.9;0;0.9" dur="1.2s" repeatCount="indefinite"/>
+          </rect>
+          <!-- Monitor stand -->
+          <rect x="100" y="150" width="20" height="18" rx="2" fill="none" stroke="url(#g1)" stroke-width="1.5" opacity="0.5"/>
+          <rect x="80" y="168" width="60" height="5" rx="2" fill="none" stroke="url(#g1)" stroke-width="1.5" opacity="0.5"/>
+          <!-- Floating elements -->
+          <!-- React atom -->
+          <circle cx="55" cy="210" r="12" fill="none" stroke="#61dafb" stroke-width="1.5" opacity="0.8" filter="url(#glow)"/>
+          <ellipse cx="55" cy="210" rx="20" ry="8" fill="none" stroke="#61dafb" stroke-width="1" opacity="0.6" transform="rotate(30 55 210)"/>
+          <ellipse cx="55" cy="210" rx="20" ry="8" fill="none" stroke="#61dafb" stroke-width="1" opacity="0.6" transform="rotate(-30 55 210)"/>
+          <circle cx="55" cy="210" r="3" fill="#61dafb" opacity="0.9"/>
+          <!-- Node.js hex -->
+          <polygon points="110,198 122,205 122,219 110,226 98,219 98,205" fill="none" stroke="#68a063" stroke-width="1.5" opacity="0.8" filter="url(#glow)"/>
+          <text x="110" y="216" text-anchor="middle" font-size="8" fill="#68a063" font-weight="bold" opacity="0.9">JS</text>
+          <!-- Python snake / diamond -->
+          <rect x="148" y="200" width="22" height="22" rx="4" fill="none" stroke="#3776ab" stroke-width="1.5" opacity="0.8" transform="rotate(45 159 211)" filter="url(#glow)"/>
+          <text x="159" y="215" text-anchor="middle" font-size="8" fill="#3776ab" font-weight="bold" opacity="0.9">Py</text>
+          <!-- Orbit dots -->
+          <circle cx="35" cy="195" r="3" fill="#8b5cf6" opacity="0.6">
+            <animateTransform attributeName="transform" type="translate" values="0,0;5,-8;0,0" dur="3s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="180" cy="185" r="2.5" fill="#06b6d4" opacity="0.6">
+            <animateTransform attributeName="transform" type="translate" values="0,0;-4,6;0,0" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="160" cy="240" r="2" fill="#4ade80" opacity="0.5">
+            <animateTransform attributeName="transform" type="translate" values="0,0;3,-5;0,0" dur="3.5s" repeatCount="indefinite"/>
+          </circle>
+          <!-- Grid dots bottom -->
+          <circle cx="38" cy="258" r="2" fill="#8b5cf6" opacity="0.3"/>
+          <circle cx="52" cy="258" r="2" fill="#8b5cf6" opacity="0.3"/>
+          <circle cx="66" cy="258" r="2" fill="#8b5cf6" opacity="0.3"/>
+          <circle cx="80" cy="258" r="2" fill="#8b5cf6" opacity="0.3"/>
+          <circle cx="94" cy="258" r="2" fill="#06b6d4" opacity="0.3"/>
+          <circle cx="108" cy="258" r="2" fill="#06b6d4" opacity="0.3"/>
+          <circle cx="122" cy="258" r="2" fill="#06b6d4" opacity="0.3"/>
+          <circle cx="38" cy="270" r="2" fill="#8b5cf6" opacity="0.2"/>
+          <circle cx="52" cy="270" r="2" fill="#8b5cf6" opacity="0.2"/>
+          <circle cx="66" cy="270" r="2" fill="#06b6d4" opacity="0.2"/>
+          <circle cx="80" cy="270" r="2" fill="#4ade80" opacity="0.2"/>
+        </svg>
+        <p style="text-align:center; font-size:0.78rem; color:var(--text-muted); margin-top:12px; line-height:1.5;">Crafting full-stack solutions with modern tools</p>
       </div>
 
       <!-- Card 5 - span 2 -->
@@ -1029,6 +1222,50 @@
   </div>
 </section>
 
+<!-- ====== GITHUB ACHIEVEMENTS ====== -->
+<section class="gh-achievements-section">
+  <div class="gh-achievements-inner">
+    <p class="section-label" data-aos="fade-up">Recognition</p>
+    <h2 class="section-title" data-aos="fade-up" data-aos-delay="50">GitHub Achievements</h2>
+    <p class="section-sub" data-aos="fade-up" data-aos-delay="100">Badges earned through consistent contributions, collaboration, and open-source activity.</p>
+
+    <div class="gh-badges-grid" data-aos="fade-up" data-aos-delay="150" id="ghBadgesGrid">
+      <!-- Pull Shark x3 -->
+      <div class="gh-badge-card">
+        <div class="gh-badge-img-wrap">
+          <img src="https://github.githubassets.com/images/modules/profile/achievements/pull-shark-default.png" alt="Pull Shark" loading="lazy" onerror="this.src='https://github.githubassets.com/pinned-octicons/achievements/pull-shark.svg'"/>
+        </div>
+        <div class="gh-badge-name">Pull Shark</div>
+        <div class="gh-badge-tier">× 3</div>
+      </div>
+
+      <!-- YOLO -->
+      <div class="gh-badge-card">
+        <div class="gh-badge-img-wrap">
+          <img src="https://github.githubassets.com/images/modules/profile/achievements/yolo-default.png" alt="YOLO" loading="lazy"/>
+        </div>
+        <div class="gh-badge-name">YOLO</div>
+        <div class="gh-badge-tier">Merged without review</div>
+      </div>
+
+      <!-- Quickdraw -->
+      <div class="gh-badge-card new-badge">
+        <span class="gh-new-chip">New</span>
+        <div class="gh-badge-img-wrap">
+          <img src="https://github.githubassets.com/images/modules/profile/achievements/quickdraw-default.png" alt="Quickdraw" loading="lazy"/>
+        </div>
+        <div class="gh-badge-name">Quickdraw</div>
+        <div class="gh-badge-tier">Fast responder</div>
+      </div>
+    </div>
+
+    <p class="gh-achievements-note">
+      <i class="fas fa-circle"></i>
+      Badges are fetched live from GitHub and update automatically as new ones are earned.
+    </p>
+  </div>
+</section>
+
 <!-- ====== CTA ====== -->
 <section class="cta-section">
   <div class="cta-inner">
@@ -1073,7 +1310,7 @@
   });
 
   // Typing animation
-  const roles = ['Full Stack Developer', 'React Developer', 'Python Engineer', 'Cybersecurity Enthusiast', 'Problem Solver'];
+  const roles = ['Full Stack Developer', 'React Developer', 'Python Engineer', 'Problem Solver', 'Backend Engineer'];
   let ri = 0, ci = 0, deleting = false;
   const el = document.getElementById('typedRole');
 
@@ -1152,6 +1389,84 @@
       container.appendChild(grid);
     } catch(e) {
       document.getElementById('contribHeatmapCard').style.display = 'none';
+    }
+  })();
+
+  // GitHub Achievements — fetch live via GitHub GraphQL API
+  // Known badge image base URL from GitHub CDN
+  const GH_BADGE_BASE = 'https://github.githubassets.com/images/modules/profile/achievements/';
+
+  // All known GitHub achievements with display metadata
+  const GH_ACHIEVEMENTS_META = {
+    'pull-shark':            { name: 'Pull Shark',            tier: badge => badge.tier ? `× ${badge.tier}` : '' },
+    'yolo':                  { name: 'YOLO',                  tier: () => 'Merged without review' },
+    'quickdraw':             { name: 'Quickdraw',             tier: () => 'Fast responder' },
+    'starstruck':            { name: 'Starstruck',            tier: () => '16+ stars on a repo' },
+    'pair-extraordinaire':   { name: 'Pair Extraordinaire',   tier: badge => badge.tier ? `× ${badge.tier}` : '' },
+    'galaxy-brain':          { name: 'Galaxy Brain',          tier: () => 'Answer accepted' },
+    'public-sponsor':        { name: 'Public Sponsor',        tier: () => 'GitHub Sponsor' },
+    'arctic-code-vault-contributor': { name: 'Arctic Vault',  tier: () => 'Code preserved' },
+  };
+
+  // Hardcoded known badges (from profile — always shown as fallback)
+  // Mark the most recently earned with isNew:true
+  const KNOWN_BADGES = [
+    { slug: 'pull-shark',  tier: 3,  isNew: false },
+    { slug: 'yolo',        tier: null, isNew: false },
+    { slug: 'quickdraw',   tier: null, isNew: true },
+  ];
+
+  function renderBadges(badges) {
+    const grid = document.getElementById('ghBadgesGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    badges.forEach(b => {
+      const meta = GH_ACHIEVEMENTS_META[b.slug] || { name: b.slug, tier: () => '' };
+      const tierText = typeof meta.tier === 'function' ? meta.tier(b) : '';
+      const card = document.createElement('div');
+      card.className = 'gh-badge-card' + (b.isNew ? ' new-badge' : '');
+      card.innerHTML = `
+        ${b.isNew ? '<span class="gh-new-chip">New</span>' : ''}
+        <div class="gh-badge-img-wrap">
+          <img src="${GH_BADGE_BASE}${b.slug}-default.png" alt="${meta.name}" loading="lazy"
+               onerror="this.parentElement.innerHTML='<svg viewBox=\\'0 0 40 40\\' width=\\'40\\'><text y=\\'28\\' x=\\'8\\' font-size=\\'26\\'>🏅</text></svg>'"/>
+        </div>
+        <div class="gh-badge-name">${meta.name}</div>
+        ${tierText ? `<div class="gh-badge-tier">${tierText}</div>` : ''}
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  // Render known badges immediately, then try live fetch
+  renderBadges(KNOWN_BADGES);
+
+  // Attempt to fetch from GitHub's undocumented achievements endpoint via profile HTML scrape
+  // Falls back silently to KNOWN_BADGES already rendered above
+  (async () => {
+    try {
+      // GitHub doesn't expose achievements in REST API — use a CORS proxy to scrape profile
+      const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent('https://github.com/AbhijeetYadav09')}`;
+      const res = await fetch(proxyUrl, { signal: AbortSignal.timeout(6000) });
+      if (!res.ok) return;
+      const { contents } = await res.json();
+      // Parse achievement slugs from the profile HTML
+      const matches = [...contents.matchAll(/achievements\/([\w-]+)-default\.png/g)];
+      if (!matches.length) return;
+      const slugs = [...new Set(matches.map(m => m[1]))];
+      if (!slugs.length) return;
+      // Build badge list — preserve isNew for known slugs
+      const liveBadges = slugs.map(slug => {
+        const known = KNOWN_BADGES.find(k => k.slug === slug);
+        return known || { slug, tier: null, isNew: false };
+      });
+      // Detect any new slug not in KNOWN_BADGES
+      liveBadges.forEach(b => {
+        if (!KNOWN_BADGES.find(k => k.slug === b.slug)) b.isNew = true;
+      });
+      renderBadges(liveBadges);
+    } catch (_) {
+      // Silent fail — KNOWN_BADGES already displayed
     }
   })();
 </script>
