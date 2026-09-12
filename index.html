@@ -1261,7 +1261,7 @@
 
     <p class="gh-achievements-note">
       <i class="fas fa-circle"></i>
-      Badges are fetched live from GitHub and update automatically as new ones are earned.
+      Badges sync automatically from GitHub once a day as new ones are earned.
     </p>
   </div>
 </section>
@@ -1438,31 +1438,24 @@
     });
   }
 
-  // Render known badges immediately, then try live fetch
+  // Render known badges immediately, then load the auto-updated data file
   renderBadges(KNOWN_BADGES);
 
-  // Attempt to fetch from GitHub's undocumented achievements endpoint via profile HTML scrape
-  // Falls back silently to KNOWN_BADGES already rendered above
+  // Badges are refreshed daily by .github/workflows/update-github-achievements.yml,
+  // which scrapes the GitHub achievements page and writes this JSON file. Reading it
+  // same-origin avoids the CORS restrictions and third-party proxy flakiness that
+  // client-side scraping of github.com ran into.
   (async () => {
     try {
-      // GitHub doesn't expose achievements in REST API — use a CORS proxy to scrape profile
-      const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent('https://github.com/AbhijeetYadav09')}`;
-      const res = await fetch(proxyUrl, { signal: AbortSignal.timeout(6000) });
+      const res = await fetch('assets/data/github-achievements.json', { cache: 'no-store', signal: AbortSignal.timeout(6000) });
       if (!res.ok) return;
-      const { contents } = await res.json();
-      // Parse achievement slugs from the profile HTML
-      const matches = [...contents.matchAll(/achievements\/([\w-]+)-default\.png/g)];
-      if (!matches.length) return;
-      const slugs = [...new Set(matches.map(m => m[1]))];
-      if (!slugs.length) return;
-      // Build badge list — preserve isNew for known slugs
-      const liveBadges = slugs.map(slug => {
-        const known = KNOWN_BADGES.find(k => k.slug === slug);
-        return known || { slug, tier: null, isNew: false };
-      });
-      // Detect any new slug not in KNOWN_BADGES
-      liveBadges.forEach(b => {
-        if (!KNOWN_BADGES.find(k => k.slug === b.slug)) b.isNew = true;
+      const data = await res.json();
+      const badges = Array.isArray(data.badges) ? data.badges : [];
+      if (!badges.length) return;
+      // Preserve isNew for known slugs, and flag any slug not seen before
+      const liveBadges = badges.map(b => {
+        const known = KNOWN_BADGES.find(k => k.slug === b.slug);
+        return { slug: b.slug, tier: b.tier ?? (known ? known.tier : null), isNew: known ? known.isNew : true };
       });
       renderBadges(liveBadges);
     } catch (_) {

@@ -1,0 +1,35 @@
+name: Update GitHub Achievements
+
+on:
+  schedule:
+    - cron: '0 6 * * *' # daily at 06:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update-badges:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Fetch latest achievement badges
+        run: python3 scripts/fetch-achievements.py
+
+      - name: Commit changes if badges updated
+        run: |
+          if git diff --quiet -- assets/data/github-achievements.json; then
+            echo "No badge changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add assets/data/github-achievements.json
+          git commit -m "chore: update GitHub achievements badges"
+          git push
